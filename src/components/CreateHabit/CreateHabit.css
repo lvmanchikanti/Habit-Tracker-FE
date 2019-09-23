@@ -1,0 +1,4 @@
+.create-habit-modal-form {
+  display: flex;
+  flex-direction: column;
+}
