@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "./actions";
 
-function App() {
+const App = () => {
+  //pulls all states with useSelector
+  const counter = useSelector(state => state.counter);
+  //dispatches actions
+  const dispatch = useDispatch();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <h1 className="main-heading">Here you come!</h1>
+        <h2 className="secondary-heading">
+          Your MERN application is successfully generated.
+        </h2>
       </header>
+      <p className="paragraph">HELLO WORLD</p>
+      <h1>Counter {counter}</h1>
+      <button onClick={() => dispatch(increment())}>+</button>
+      <button onClick={() => dispatch(decrement())}>-</button>
     </div>
   );
-}
+};
 
 export default App;
