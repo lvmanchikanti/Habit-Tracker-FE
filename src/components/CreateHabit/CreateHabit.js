@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Button, Modal } from "reactstrap";
+import { Button, Modal, Collapse } from "reactstrap";
+import CreateGroup from "../CreateGroup";
 
 const CreateHabit = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [toggleCreateGroup, setToggleCreateGroup] = useState(false);
 
   const userCollections = [
     "Health",
@@ -42,22 +44,27 @@ const CreateHabit = () => {
               Habit Name:
               <input type="text" name="habitName" />
             </label>
-            <label>
-              Add to Existing Collection:
-              <select>
-                {userCollections.map(collection => {
-                  return <option value={collection}>{collection}</option>;
-                })}
-              </select>
-            </label>
-            <label>
-              Add to New Collection:
-              <input type="text" name="newCollectionName" />
-            </label>
-            <label>
-              Add Friends:
-              <input type="text" name="friendName" />
-            </label>
+            <Button
+              color="primary"
+              onClick={() => setToggleCreateGroup(!toggleCreateGroup)}
+            >
+              {toggleCreateGroup ? "Cancel" : "Create New Group"}
+            </Button>
+            {!toggleCreateGroup && (
+              <label>
+                Add to Existing Collection:
+                <select>
+                  {userCollections.map(collection => {
+                    return <option value={collection}>{collection}</option>;
+                  })}
+                </select>
+              </label>
+            )}
+            {toggleCreateGroup && (
+              <CreateGroup
+                onClick={() => setToggleCreateGroup(!toggleCreateGroup)}
+              />
+            )}
           </form>
         </div>
         <div className="modal-footer">
@@ -70,7 +77,7 @@ const CreateHabit = () => {
             Close
           </Button>
           <Button color="primary" type="button">
-            Save
+            Create Habit
           </Button>
         </div>
       </Modal>
