@@ -1,18 +1,10 @@
 import React, { useState } from "react";
-import { Button, Modal, Collapse } from "reactstrap";
+import { Button, Modal } from "reactstrap";
 import CreateGroup from "../CreateGroup";
 
-const CreateHabit = () => {
+const CreateHabit = ({ existingGroups }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [toggleCreateGroup, setToggleCreateGroup] = useState(false);
-
-  const userCollections = [
-    "Health",
-    "Education",
-    "Beauty",
-    "Hobby",
-    "Self Care"
-  ];
 
   return (
     <React.Fragment>
@@ -54,8 +46,8 @@ const CreateHabit = () => {
               <label>
                 Add to Existing Collection:
                 <select>
-                  {userCollections.map(collection => {
-                    return <option value={collection}>{collection}</option>;
+                  {existingGroups.map(group => {
+                    return <option value={group}>{group}</option>;
                   })}
                 </select>
               </label>
