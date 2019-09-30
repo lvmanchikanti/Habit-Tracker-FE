@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import { Button, Modal } from "reactstrap";
 import CreateGroup from "../CreateGroup";
 
-const CreateHabit = ({ existingGroups }) => {
+const CreateHabit = ({ existingGroups, createNewHabit }) => {
+  console.log(existingGroups);
   const [modalOpen, setModalOpen] = useState(false);
   const [toggleCreateGroup, setToggleCreateGroup] = useState(false);
+  const [newHabit, setNewHabit] = useState({ habitName: "", habitGroup: "" });
 
+  const handleHabitChange = event => {
+    setNewHabit({ ...newHabit, [event.target.name]: event.target.value });
+    console.log(newHabit);
+  };
   return (
-    <React.Fragment>
+    <>
       <Button color="primary" type="button" onClick={() => setModalOpen(true)}>
         Create Habit
       </Button>
@@ -34,7 +40,11 @@ const CreateHabit = ({ existingGroups }) => {
           <form className="create-habit-modal-form">
             <label>
               Habit Name:
-              <input type="text" name="habitName" />
+              <input
+                type="text"
+                onChange={event => handleHabitChange(event)}
+                name="habitName"
+              />
             </label>
             <Button
               color="primary"
@@ -45,7 +55,10 @@ const CreateHabit = ({ existingGroups }) => {
             {!toggleCreateGroup && (
               <label>
                 Add to Existing Collection:
-                <select>
+                <select
+                  name="habitGroup"
+                  onClick={event => handleHabitChange(event)}
+                >
                   {existingGroups.map(group => {
                     return <option value={group}>{group}</option>;
                   })}
@@ -68,12 +81,19 @@ const CreateHabit = ({ existingGroups }) => {
           >
             Close
           </Button>
-          <Button color="primary" type="button">
+          <Button
+            color="primary"
+            type="button"
+            onClick={() => {
+              createNewHabit(newHabit);
+              setModalOpen(false);
+            }}
+          >
             Create Habit
           </Button>
         </div>
       </Modal>
-    </React.Fragment>
+    </>
   );
 };
 
