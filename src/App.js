@@ -16,26 +16,21 @@ import CreateHabit from "./components/CreateHabit";
 const App = props => {
   const [groupState, setExistingGroups] = useState(props.existingGroups);
   useEffect(() => {
-    setExistingGroups(groupActions.getExistingGroups());
-    console.log(groupState);
+    const groupResult = groupActions.getExistingGroups();
+    setExistingGroups(groupResult.payload);
   }, []);
 
-  const { counterActions, groupActions, habitActions } = props;
-  console.log(props);
-  console.log(groupState);
+  const { groupActions, habitActions } = props;
+
   return (
     <div>
       <header>
         <h1>Habit Tracker</h1>
       </header>
       <CreateHabit
-        existingGroups={props.existingGroups}
+        existingGroups={groupState}
         createNewHabit={habitActions.createNewHabit}
       />
-
-      <h1>Counter {props.counter}</h1>
-      <button onClick={() => counterActions.increment()}>+</button>
-      <button onClick={() => counterActions.decrement()}>-</button>
 
       <h1>Habits Created</h1>
       {props.habits.map(habit => {

@@ -3,14 +3,15 @@ import { Button, Modal } from "reactstrap";
 import CreateGroup from "../CreateGroup";
 
 const CreateHabit = ({ existingGroups, createNewHabit }) => {
-  console.log(existingGroups);
   const [modalOpen, setModalOpen] = useState(false);
   const [toggleCreateGroup, setToggleCreateGroup] = useState(false);
-  const [newHabit, setNewHabit] = useState({ habitName: "", habitGroup: "" });
+  const [newHabit, setNewHabit] = useState({
+    habitName: "",
+    habitGroup: ""
+  });
 
   const handleHabitChange = event => {
     setNewHabit({ ...newHabit, [event.target.name]: event.target.value });
-    console.log(newHabit);
   };
   return (
     <>
@@ -57,8 +58,9 @@ const CreateHabit = ({ existingGroups, createNewHabit }) => {
                 Add to Existing Collection:
                 <select
                   name="habitGroup"
-                  onClick={event => handleHabitChange(event)}
+                  onChange={event => handleHabitChange(event)}
                 >
+                  <option value="">{"Select Existing Habit"}</option>
                   {existingGroups.map(group => {
                     return <option value={group}>{group}</option>;
                   })}
