@@ -7,21 +7,13 @@ import TextField from "@material-ui/core/TextField";
 import ButtonUI from "@material-ui/core/Button";
 import Select from "react-select";
 
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from "reactstrap";
-
-const CreateHabit = ({ existingGroups, createNewHabit }) => {
+const CreateHabit = ({ existingGroups, createNewHabit, createNewGroup }) => {
   const [modalOpen, setModalOpen] = useState(true);
-  const [showCreateGroup, setShowCreateGroup] = useState(false);
+  const [showCreateGroup, setShowCreateGroup] = useState(true);
   const [newHabit, setNewHabit] = useState({
     habitName: "",
     habitGroup: ""
   });
-  const [newGroupCreated, setNewGroupCreated] = useState(false);
 
   const handleHabitChange = (event, name) => {
     //name change
@@ -69,57 +61,33 @@ const CreateHabit = ({ existingGroups, createNewHabit }) => {
               }
               label="Create New Group"
             />
-            <TextField
-              id="habitName"
-              label="Habit Name"
-              name="habitName"
-              value={newHabit.habitName}
-              onChange={event => handleHabitChange(event)}
-              margin="normal"
-              variant="outlined"
-            />
-            {/* {!showCreateGroup && (
-              <>
-                <h5>Choose Group</h5>
-                <Dropdown
-                  isOpen={showDropdown}
-                  toggle={() => setShowDropdown(!showDropdown)}
-                >
-                  <DropdownToggle caret>
-                    {newHabit.habitGroup ? newHabit.habitGroup : "Select Group"}
-                  </DropdownToggle>
-                  <DropdownMenu>
-                    {existingGroups.map(group => {
-                      return (
-                        <DropdownItem
-                          value={group}
-                          name="habitGroup"
-                          onClick={event => handleHabitChange(event)}
-                        >
-                          {group}
-                        </DropdownItem>
-                      );
-                    })}
-                  </DropdownMenu>
-                </Dropdown>
-              </>
-            )} */}
             {!showCreateGroup && (
-              <Select
-                defaultValue={newHabit.habitGroup}
-                onChange={event => handleHabitChange(event, "habitGroup")}
-                name="habitGroup"
-                options={existingGroups.map(group => ({
-                  value: group,
-                  label: group
-                }))}
-                placeholder="Choose Group"
-              />
+              <>
+                <TextField
+                  id="habitName"
+                  label="Habit Name"
+                  name="habitName"
+                  value={newHabit.habitName}
+                  onChange={event => handleHabitChange(event)}
+                  margin="normal"
+                  variant="outlined"
+                />
+                <Select
+                  defaultValue={newHabit.habitGroup}
+                  onChange={event => handleHabitChange(event, "habitGroup")}
+                  name="habitGroup"
+                  options={existingGroups.map(group => ({
+                    value: group.groupName,
+                    label: group.groupName
+                  }))}
+                  placeholder="Choose Group"
+                />
+              </>
             )}
             {showCreateGroup && (
               <CreateGroup
                 onClick={() => setShowCreateGroup(!showCreateGroup)}
-                setNewGroupCreated={() => setNewGroupCreated(true)}
+                createNewGroup={createNewGroup}
               />
             )}
           </form>

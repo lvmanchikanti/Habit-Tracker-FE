@@ -16,11 +16,13 @@ import CreateHabit from "./components/CreateHabit";
 const App = props => {
   const [groupState, setExistingGroups] = useState(props.existingGroups);
   useEffect(() => {
-    const groupResult = groupActions.getExistingGroups();
+    const groupResult = props.groupActions.getExistingGroups();
     setExistingGroups(groupResult.payload);
-  }, []);
+  }, [props.groupActions]);
 
   const { groupActions, habitActions } = props;
+  console.log(groupState);
+  console.log(props.existingGroups);
 
   return (
     <div>
@@ -28,12 +30,13 @@ const App = props => {
         <h1>Habit Tracker</h1>
       </header>
       <CreateHabit
-        existingGroups={groupState}
+        existingGroups={props.existingGroups}
         createNewHabit={habitActions.createNewHabit}
+        createNewGroup={groupActions.createNewGroup}
       />
-
       <h1>Habits Created</h1>
       {props.habits.map(habit => {
+        // TODO - add habit id as key in div
         return (
           <div>
             <h3>{habit.habitName}</h3>

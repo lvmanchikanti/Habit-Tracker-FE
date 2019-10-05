@@ -1,4 +1,4 @@
-const initialState = [{ habitName: "testname", habitGroup: "testgroup" }];
+const initialState = [{ habitName: "", habitGroup: "" }];
 
 const habitReducer = (state = initialState, action) => {
   switch (action.type) {
