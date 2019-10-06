@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 // Import Redux
@@ -16,10 +16,10 @@ import CreateHabit from "./components/CreateHabit";
 const App = props => {
   useEffect(() => {
     props.groupActions.fetchGroups();
-  }, []);
+    props.habitActions.getExistingHabits();
+  }, [props.groupActions, props.habitActions]);
 
   const { groupActions, habitActions } = props;
-  console.log(props.existingGroups);
   return (
     <div>
       <header>

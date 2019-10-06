@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button, Modal } from "reactstrap";
 import CreateGroup from "../CreateGroup";
 import Switch from "@material-ui/core/Switch";

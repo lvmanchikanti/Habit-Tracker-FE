@@ -3,7 +3,6 @@ const initialState = [];
 const groupReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_EXISTING_GROUPS":
-      console.log(action.payload);
       return action.payload;
     case "CREATE_NEW_GROUP":
       return [...state, action.payload];

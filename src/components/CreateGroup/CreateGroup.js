@@ -22,12 +22,9 @@ const CreateGroup = ({ onClick, createNewGroup }) => {
     for (let i = 0; i < event.length; i++) {
       friendIds.push(event[i].userId);
     }
-    console.log(friendIds);
 
     if (event.target) {
-      console.log(event.target.name);
-      console.log(event.target.value);
-
+      // TODO - figure out a more elegant way to set collectionId to an actual number instead of its name
       setNewGroup({
         ...newGroup,
         [event.target.name]: event.target.value,
@@ -38,8 +35,6 @@ const CreateGroup = ({ onClick, createNewGroup }) => {
     else {
       setNewGroup({ ...newGroup, userIds: friendIds });
     }
-
-    console.log(newGroup);
   };
   return (
     <>
