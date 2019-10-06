@@ -4,28 +4,39 @@ import TextField from "@material-ui/core/TextField";
 import Select from "react-select";
 
 const friendOptions = [
-  { value: "cynthia", label: "Cynthia" },
-  { value: "simone", label: "Simone" },
-  { value: "lahari", label: "Lahari" }
+  { value: "cynthia", label: "Cynthia", userId: "1" },
+  { value: "simone", label: "Simone", userId: "2" },
+  { value: "lahari", label: "Lahari", userId: "3" }
 ];
 
 const CreateGroup = ({ onClick, createNewGroup }) => {
   const [newGroup, setNewGroup] = useState({
-    groupName: "",
-    groupFriends: []
+    name: "",
+    userIds: [],
+    habitIds: [],
+    collectionId: ""
   });
 
   const handleNewGroupChange = event => {
-    console.log(event);
+    let friendIds = [];
+    for (let i = 0; i < event.length; i++) {
+      friendIds.push(event[i].userId);
+    }
+    console.log(friendIds);
+
     if (event.target) {
       console.log(event.target.name);
       console.log(event.target.value);
 
-      setNewGroup({ ...newGroup, [event.target.name]: event.target.value });
+      setNewGroup({
+        ...newGroup,
+        [event.target.name]: event.target.value,
+        collectionId: event.target.value
+      });
     }
     //add array of friends
     else {
-      setNewGroup({ ...newGroup, groupFriends: event });
+      setNewGroup({ ...newGroup, userIds: friendIds });
     }
 
     console.log(newGroup);
@@ -33,9 +44,9 @@ const CreateGroup = ({ onClick, createNewGroup }) => {
   return (
     <>
       <TextField
-        id="groupName"
+        id="name"
         label="Group Name"
-        name="groupName"
+        name="name"
         value={newGroup.newGroupName}
         onChange={event => handleNewGroupChange(event)}
         margin="normal"

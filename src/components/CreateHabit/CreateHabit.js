@@ -8,8 +8,8 @@ import ButtonUI from "@material-ui/core/Button";
 import Select from "react-select";
 
 const CreateHabit = ({ existingGroups, createNewHabit, createNewGroup }) => {
-  const [modalOpen, setModalOpen] = useState(true);
-  const [showCreateGroup, setShowCreateGroup] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [showCreateGroup, setShowCreateGroup] = useState(false);
   const [newHabit, setNewHabit] = useState({
     habitName: "",
     habitGroup: ""
@@ -77,8 +77,8 @@ const CreateHabit = ({ existingGroups, createNewHabit, createNewGroup }) => {
                   onChange={event => handleHabitChange(event, "habitGroup")}
                   name="habitGroup"
                   options={existingGroups.map(group => ({
-                    value: group.groupName,
-                    label: group.groupName
+                    value: group.name,
+                    label: group.name
                   }))}
                   placeholder="Choose Group"
                 />
