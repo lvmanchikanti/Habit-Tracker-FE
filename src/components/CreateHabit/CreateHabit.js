@@ -12,7 +12,8 @@ const CreateHabit = ({ existingGroups, postNewHabit, postNewGroup }) => {
   const [showCreateGroup, setShowCreateGroup] = useState(false);
   const [newHabit, setNewHabit] = useState({
     habitName: "",
-    habitGroup: ""
+    habitGroupName: "",
+    habitGroupID: ""
   });
 
   const handleHabitChange = (event, name) => {
@@ -22,6 +23,7 @@ const CreateHabit = ({ existingGroups, postNewHabit, postNewGroup }) => {
     }
     //dropdown group change
     else {
+      console.log(event);
       setNewHabit({ ...newHabit, [name]: event.value });
     }
   };
@@ -73,11 +75,11 @@ const CreateHabit = ({ existingGroups, postNewHabit, postNewGroup }) => {
                   variant="outlined"
                 />
                 <Select
-                  defaultValue={newHabit.habitGroup}
-                  onChange={event => handleHabitChange(event, "habitGroup")}
-                  name="habitGroup"
+                  defaultValue={newHabit.habitGroupName}
+                  onChange={event => handleHabitChange(event, "habitGroupID")}
+                  name="habitGroupID"
                   options={existingGroups.map(group => ({
-                    value: group.name,
+                    value: group._id,
                     label: group.name
                   }))}
                   placeholder="Choose Group"
@@ -112,7 +114,7 @@ const CreateHabit = ({ existingGroups, postNewHabit, postNewGroup }) => {
               //reset values in newHabit
               setNewHabit({
                 habitName: "",
-                habitGroup: ""
+                habitGroupName: ""
               });
               setModalOpen(false);
             }}
