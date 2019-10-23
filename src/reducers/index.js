@@ -1,8 +1,13 @@
-import counterReducer from './counter';
-import {combineReducers} from 'redux';
+import counterReducer from "./counter";
+import groupReducer from "./groupReducer";
+import habitReducer from "./habitReducer";
+
+import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
-    counter : counterReducer
+  counter: counterReducer,
+  groups: groupReducer,
+  habits: habitReducer
 });
 
 export default rootReducer;
