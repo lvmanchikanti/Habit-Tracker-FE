@@ -16,7 +16,7 @@ import CreateHabit from "./components/CreateHabit";
 const App = props => {
   useEffect(() => {
     props.groupActions.fetchGroups();
-    props.habitActions.getExistingHabits();
+    props.habitActions.fetchExistingHabits();
   }, [props.groupActions, props.habitActions]);
 
   const { groupActions, habitActions } = props;
@@ -27,8 +27,8 @@ const App = props => {
       </header>
       <CreateHabit
         existingGroups={props.existingGroups}
-        createNewHabit={habitActions.createNewHabit}
-        createNewGroup={groupActions.createGroup}
+        postNewHabit={habitActions.postNewHabit}
+        postNewGroup={groupActions.postNewGroup}
       />
       <h1>Habits Created</h1>
       {props.habits.map(habit => {
@@ -36,7 +36,7 @@ const App = props => {
         return (
           <div>
             <h3>{habit.habitName}</h3>
-            <h3>{habit.habitGroup}</h3>
+            <h3>{habit.habitGroup ? habit.habitGroup : ""}</h3>
           </div>
         );
       })}

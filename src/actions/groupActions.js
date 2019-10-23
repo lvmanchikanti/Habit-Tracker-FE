@@ -5,6 +5,10 @@ import {
 
 const collectionsURL = "http://localhost:8000/collections/";
 
+/*
+REDUX ACTION
+*/
+
 export const getExistingGroups = existingGroups => {
   return {
     type: GET_EXISTING_GROUPS,
@@ -19,17 +23,23 @@ export const createNewGroup = newGroup => {
   };
 };
 
+/*
+API CALLS
+*/
 export const fetchGroups = () => {
-  return dispatch => {
-    fetch(collectionsURL)
-      .then(response => response.json())
-      .then(data => {
-        dispatch(getExistingGroups(data));
-      });
+  return async dispatch => {
+    let response = await fetch(collectionsURL);
+    let data = await response.json();
+    dispatch(getExistingGroups(data));
+    // fetch(collectionsURL)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     dispatch(getExistingGroups(data));
+    //   });
   };
 };
 
-export const createGroup = newGroup => {
+export const postNewGroup = newGroup => {
   return dispatch => {
     fetch(collectionsURL, {
       headers: { "Content-Type": "application/json" },

@@ -9,7 +9,7 @@ const friendOptions = [
   { value: "lahari", label: "Lahari", userId: "3" }
 ];
 
-const CreateGroup = ({ onClick, createNewGroup }) => {
+const CreateGroup = ({ onClick, postNewGroup }) => {
   const [newGroup, setNewGroup] = useState({
     name: "",
     userIds: [],
@@ -56,7 +56,7 @@ const CreateGroup = ({ onClick, createNewGroup }) => {
       <Button
         variant="outlined"
         color="secondary"
-        onClick={() => createNewGroup(newGroup)}
+        onClick={() => postNewGroup(newGroup)}
       >
         Create Group
       </Button>

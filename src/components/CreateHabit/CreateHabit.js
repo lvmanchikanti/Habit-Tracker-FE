@@ -7,7 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import ButtonUI from "@material-ui/core/Button";
 import Select from "react-select";
 
-const CreateHabit = ({ existingGroups, createNewHabit, createNewGroup }) => {
+const CreateHabit = ({ existingGroups, postNewHabit, postNewGroup }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [showCreateGroup, setShowCreateGroup] = useState(false);
   const [newHabit, setNewHabit] = useState({
@@ -87,7 +87,7 @@ const CreateHabit = ({ existingGroups, createNewHabit, createNewGroup }) => {
             {showCreateGroup && (
               <CreateGroup
                 onClick={() => setShowCreateGroup(!showCreateGroup)}
-                createNewGroup={createNewGroup}
+                postNewGroup={postNewGroup}
               />
             )}
           </form>
@@ -107,7 +107,8 @@ const CreateHabit = ({ existingGroups, createNewHabit, createNewGroup }) => {
             type="button"
             variant="outlined"
             onClick={() => {
-              createNewHabit(newHabit);
+              console.log(newHabit);
+              postNewHabit(newHabit);
               //reset values in newHabit
               setNewHabit({
                 habitName: "",

@@ -5,7 +5,7 @@ const habitReducer = (state = initialState, action) => {
     case "CREATE_NEW_HABIT":
       return [...state, action.payload];
     case "GET_EXISTING_HABITS":
-      return state;
+      return action.payload;
     default:
       return state;
   }
