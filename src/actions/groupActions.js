@@ -33,7 +33,7 @@ export const deleteHabitFromGroup = (habitId, groupId) => {
 /*
 API CALLS
 */
-export const fetchGroups = () => {
+export const getExistingGroupsAPI = () => {
   return async dispatch => {
     let response = await fetch(collectionsURL);
     let data = await response.json();
@@ -48,7 +48,7 @@ export const fetchGroups = () => {
   };
 };
 
-export const postNewGroup = newGroup => {
+export const createNewGroupAPI = newGroup => {
   return dispatch => {
     fetch(collectionsURL, {
       headers: { "Content-Type": "application/json" },

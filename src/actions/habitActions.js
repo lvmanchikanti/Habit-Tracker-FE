@@ -35,7 +35,7 @@ export const deleteHabit = deletedHabitId => {
 /*
 API CALLS
 */
-export const fetchExistingHabits = () => {
+export const getExistingHabitsAPI = () => {
   return async dispatch => {
     let response = await fetch(habitsURL);
     let data = await response.json();
@@ -46,7 +46,7 @@ export const fetchExistingHabits = () => {
   };
 };
 
-export const postNewHabit = newHabit => {
+export const createNewHabitAPI = newHabit => {
   return dispatch => {
     fetch(habitsURL + "create", {
       headers: { "Content-Type": "application/json" },
@@ -62,7 +62,7 @@ export const postNewHabit = newHabit => {
   };
 };
 
-export const deleteHabitById = habitId => {
+export const deleteHabitAPI = habitId => {
   console.log("check: ", habitId);
   return dispatch => {
     fetch(habitsURL + "delete/" + habitId, {

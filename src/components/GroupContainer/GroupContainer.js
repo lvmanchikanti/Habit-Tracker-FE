@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 
 const GroupContainer = ({
   existingGroups,
-  deleteHabitById,
+  deleteHabitAPI,
   deleteHabitFromGroup
 }) => {
   return (
@@ -19,7 +19,7 @@ const GroupContainer = ({
                   <p>{habitId}</p>
                   <Button
                     onClick={() => {
-                      deleteHabitById(habitId);
+                      deleteHabitAPI(habitId);
                       deleteHabitFromGroup(habitId, group._id);
                     }}
                   >

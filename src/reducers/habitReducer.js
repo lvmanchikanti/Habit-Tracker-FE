@@ -1,5 +1,4 @@
-//TODO make this empty array
-const initialState = [{ habitName: "", habitGroup: "" }];
+const initialState = [];
 
 const habitReducer = (state = initialState, action) => {
   switch (action.type) {
