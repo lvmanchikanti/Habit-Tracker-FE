@@ -1,3 +1,4 @@
+//TODO make this empty array
 const initialState = [{ habitName: "", habitGroup: "" }];
 
 const habitReducer = (state = initialState, action) => {
@@ -6,6 +7,8 @@ const habitReducer = (state = initialState, action) => {
       return [...state, action.payload];
     case "GET_EXISTING_HABITS":
       return action.payload;
+    case "DELETE_HABIT":
+      return state.filter(habitId => habitId !== action.payload);
     default:
       return state;
   }
