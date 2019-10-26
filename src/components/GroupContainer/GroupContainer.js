@@ -10,12 +10,12 @@ const GroupContainer = ({
     <div>
       {existingGroups.map(group => {
         return (
-          <div className="group-container">
+          <div className="group-container" key={group._id}>
             <h1>{group.name}</h1>
             <h4>habit ids</h4>
             {group.habitIds.map(habitId => {
               return (
-                <div>
+                <div key={habitId}>
                   <p>{habitId}</p>
                   <Button
                     onClick={() => {
@@ -31,7 +31,7 @@ const GroupContainer = ({
 
             <h4>user ids</h4>
             {group.userIds.map(userId => {
-              return <p>{userId}</p>;
+              return <p key={userId}>{userId}</p>;
             })}
           </div>
         );

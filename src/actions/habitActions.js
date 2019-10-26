@@ -35,6 +35,8 @@ export const deleteHabit = deletedHabitId => {
 /*
 API CALLS
 */
+
+// NOTE: May not need now that we fetch in App.js
 export const getExistingHabitsAPI = () => {
   return async dispatch => {
     let response = await fetch(habitsURL);
