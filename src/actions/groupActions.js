@@ -33,11 +33,14 @@ export const deleteHabitFromGroup = (habitId, groupId) => {
 /*
 API CALLS
 */
+
+// NOTE: May not need now that we fetch in App.js
+
 export const getExistingGroupsAPI = () => {
   return async dispatch => {
     let response = await fetch(collectionsURL);
     let data = await response.json();
-    console.log(data);
+    //console.log(data);
 
     dispatch(getExistingGroups(data));
     // fetch(collectionsURL)
