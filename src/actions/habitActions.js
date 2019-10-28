@@ -1,6 +1,7 @@
 import {
   CREATE_NEW_HABIT,
-  GET_EXISTING_HABITS
+  GET_EXISTING_HABITS,
+  DELETE_HABIT
 } from "../constants/actionTypes.js";
 
 const habitsURL = "http://localhost:8000/habits/";
@@ -24,10 +25,17 @@ export const getExistingHabits = existingHabits => {
   };
 };
 
+export const deleteHabit = deletedHabitId => {
+  return {
+    type: DELETE_HABIT,
+    payload: deletedHabitId
+  };
+};
+
 /*
 API CALLS
 */
-export const fetchExistingHabits = () => {
+export const getExistingHabitsAPI = () => {
   return async dispatch => {
     let response = await fetch(habitsURL);
     let data = await response.json();
@@ -38,7 +46,7 @@ export const fetchExistingHabits = () => {
   };
 };
 
-export const postNewHabit = newHabit => {
+export const createNewHabitAPI = newHabit => {
   return dispatch => {
     fetch(habitsURL + "create", {
       headers: { "Content-Type": "application/json" },
@@ -50,6 +58,22 @@ export const postNewHabit = newHabit => {
         if (data.name !== "MongoError") {
           dispatch(createNewHabit(data));
         }
+      });
+  };
+};
+
+export const deleteHabitAPI = habitId => {
+  console.log("check: ", habitId);
+  return dispatch => {
+    fetch(habitsURL + "delete/" + habitId, {
+      headers: { "Content-Type": "application/json" },
+      method: "DELETE",
+      params: JSON.stringify(habitId)
+    })
+      .then(response => response.json())
+      .then(deletedHabitId => {
+        console.log("successfully deleted habit is: ", deletedHabitId);
+        dispatch(deleteHabit(deletedHabitId));
       });
   };
 };

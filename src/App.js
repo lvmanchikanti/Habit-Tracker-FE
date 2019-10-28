@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 // Import Redux
@@ -6,20 +6,28 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 // Import Redux Actions
-import * as CounterActions from "./actions/counterActions";
 import * as GroupActions from "./actions/groupActions.js";
 import * as HabitActions from "./actions/habitActions.js";
 
 // Import Components
 import CreateHabit from "./components/CreateHabit";
+import GroupContainer from "./components/GroupContainer";
 
 const App = props => {
+  const { getExistingGroupsAPI } = props.groupActions;
+  const { getExistingHabitsAPI } = props.habitActions;
+
+  //TODO: add use state and put state in dependency array so page rerenders after state change
+  // const [groups, setGroups] = useState(null);
+  // const [habits, setHabits] = useState(null);
+
   useEffect(() => {
-    props.groupActions.fetchGroups();
-    props.habitActions.fetchExistingHabits();
-  }, [props.groupActions, props.habitActions]);
+    getExistingGroupsAPI();
+    getExistingHabitsAPI();
+  }, [getExistingGroupsAPI, getExistingHabitsAPI]);
 
   const { groupActions, habitActions } = props;
+
   return (
     <div>
       <header>
@@ -27,19 +35,24 @@ const App = props => {
       </header>
       <CreateHabit
         existingGroups={props.existingGroups}
-        postNewHabit={habitActions.postNewHabit}
-        postNewGroup={groupActions.postNewGroup}
+        createNewHabitAPI={habitActions.createNewHabitAPI}
+        createNewGroupAPI={groupActions.createNewGroupAPI}
       />
       <h1>Habits Created</h1>
       {props.habits.map(habit => {
-        // TODO - add habit id as key in div
         return (
-          <div>
+          <div key={habit._id}>
             <h3>{habit.habitName}</h3>
             <h3>{habit.habitGroup ? habit.habitGroup : ""}</h3>
           </div>
         );
       })}
+
+      <GroupContainer
+        existingGroups={props.existingGroups}
+        deleteHabitAPI={habitActions.deleteHabitAPI}
+        deleteHabitFromGroup={groupActions.deleteHabitFromGroupAPI}
+      />
     </div>
   );
 };
@@ -47,7 +60,6 @@ const App = props => {
 const mapStateToProps = state => {
   return {
     existingGroups: state.groups,
-    counter: state.counter,
     habits: state.habits
   };
 };
@@ -55,7 +67,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     groupActions: bindActionCreators(GroupActions, dispatch),
-    counterActions: bindActionCreators(CounterActions, dispatch),
     habitActions: bindActionCreators(HabitActions, dispatch)
   };
 };

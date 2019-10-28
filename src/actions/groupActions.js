@@ -1,6 +1,7 @@
 import {
   GET_EXISTING_GROUPS,
-  CREATE_NEW_GROUP
+  CREATE_NEW_GROUP,
+  DELETE_HABIT_FROM_GROUP
 } from "../constants/actionTypes.js";
 
 const collectionsURL = "http://localhost:8000/collections/";
@@ -23,10 +24,16 @@ export const createNewGroup = newGroup => {
   };
 };
 
+export const deleteHabitFromGroup = (habitId, groupId) => {
+  return {
+    type: DELETE_HABIT_FROM_GROUP,
+    payload: { habitId, groupId }
+  };
+};
 /*
 API CALLS
 */
-export const fetchGroups = () => {
+export const getExistingGroupsAPI = () => {
   return async dispatch => {
     let response = await fetch(collectionsURL);
     let data = await response.json();
@@ -41,7 +48,7 @@ export const fetchGroups = () => {
   };
 };
 
-export const postNewGroup = newGroup => {
+export const createNewGroupAPI = newGroup => {
   return dispatch => {
     fetch(collectionsURL, {
       headers: { "Content-Type": "application/json" },
@@ -53,6 +60,32 @@ export const postNewGroup = newGroup => {
         if (data.name !== "MongoError") {
           dispatch(createNewGroup(data));
         }
+      });
+  };
+};
+
+export const deleteHabitFromGroupAPI = (habitId, groupId) => {
+  console.log("check: ", habitId, " ", groupId);
+
+  //ES6 object initializer using variable names
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer
+  let deletedHabitAndGroup = { habitId, groupId };
+
+  return dispatch => {
+    fetch(collectionsURL + "deleteHabit", {
+      headers: { "Content-Type": "application/json" },
+      method: "DELETE",
+      body: JSON.stringify(deletedHabitAndGroup)
+    })
+      .then(response => response.json())
+      .then(groupIdDelete => {
+        console.log(
+          "successfully deleted habit is: ",
+          habitId,
+          " from group ",
+          groupIdDelete
+        );
+        dispatch(deleteHabitFromGroup(habitId, groupIdDelete));
       });
   };
 };

@@ -1,4 +1,4 @@
-const initialState = [{ habitName: "", habitGroup: "" }];
+const initialState = [];
 
 const habitReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -6,6 +6,8 @@ const habitReducer = (state = initialState, action) => {
       return [...state, action.payload];
     case "GET_EXISTING_HABITS":
       return action.payload;
+    case "DELETE_HABIT":
+      return state.filter(habitId => habitId !== action.payload);
     default:
       return state;
   }
