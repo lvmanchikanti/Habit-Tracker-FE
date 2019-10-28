@@ -3,8 +3,9 @@ import Button from "@material-ui/core/Button";
 
 const GroupContainer = ({
   existingGroups,
-  deleteHabitAPI,
-  deleteHabitFromGroup
+  deleteHabit,
+  deleteHabitFromGroup,
+  getAllHabitsInGroup
 }) => {
   return (
     <div>
@@ -12,6 +13,11 @@ const GroupContainer = ({
         return (
           <div className="group-container" key={group._id}>
             <h1>{group.name}</h1>
+            <button
+              onClick={() => getAllHabitsInGroup(group.habitIds, group._id)}
+            >
+              show habits
+            </button>
             <h4>habit ids</h4>
             {group.habitIds.map(habitId => {
               return (
@@ -19,7 +25,7 @@ const GroupContainer = ({
                   <p>{habitId}</p>
                   <Button
                     onClick={() => {
-                      deleteHabitAPI(habitId);
+                      deleteHabit(habitId);
                       deleteHabitFromGroup(habitId, group._id);
                     }}
                   >

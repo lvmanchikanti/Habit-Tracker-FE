@@ -57,6 +57,9 @@ const App = props => {
   // setGroups(props.existingGroups);
   // setHabits(props.habits);
 
+  console.log(groups);
+  console.log(habits);
+
   const { groupActions, habitActions } = props;
 
   return (
@@ -89,8 +92,9 @@ const App = props => {
 
           <GroupContainer
             existingGroups={groups}
-            deleteHabitAPI={habitActions.deleteHabitAPI}
+            deleteHabit={habitActions.deleteHabitAPI}
             deleteHabitFromGroup={groupActions.deleteHabitFromGroupAPI}
+            getAllHabitsInGroup={groupActions.getAllHabitsInGroupAPI}
           />
         </div>
       )}
