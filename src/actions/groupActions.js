@@ -45,12 +45,12 @@ API CALLS
 
 // NOTE: May not need now that we fetch in App.js
 
-export const getExistingGroupsAPI = () => {
+export const getExistingGroupsAPI = setGroups => {
   return async dispatch => {
     let response = await fetch(collectionsURL);
     let data = await response.json();
     //console.log(data);
-
+    setGroups(data);
     dispatch(getExistingGroups(data));
     // fetch(collectionsURL)
     //   .then(response => response.json())
@@ -112,6 +112,7 @@ export const getAllHabitsInGroupAPI = (habitIdList, groupId) => {
     })
       .then(response => response.json())
       .then(habits => {
+        console.log(habits);
         dispatch(addHabitsToGroup(habits, groupId));
       });
   };
