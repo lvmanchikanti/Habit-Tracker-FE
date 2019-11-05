@@ -6,6 +6,8 @@ const groupReducer = (state = initialState, action) => {
       return action.payload;
     case "CREATE_NEW_GROUP":
       return [...state, action.payload];
+    case "DELETE_GROUP":
+      return [...state, action.payload];
     default:
       return state;
   }

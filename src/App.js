@@ -91,6 +91,7 @@ const App = props => {
             existingGroups={groups}
             deleteHabitAPI={habitActions.deleteHabitAPI}
             deleteHabitFromGroup={groupActions.deleteHabitFromGroupAPI}
+            deleteGroup={groupActions.deleteGroupAPI}
           />
         </div>
       )}

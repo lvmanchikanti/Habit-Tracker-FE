@@ -1,7 +1,8 @@
 import {
   GET_EXISTING_GROUPS,
   CREATE_NEW_GROUP,
-  DELETE_HABIT_FROM_GROUP
+  DELETE_HABIT_FROM_GROUP,
+  DELETE_GROUP
 } from "../constants/actionTypes.js";
 
 const collectionsURL = "http://localhost:8000/collections/";
@@ -30,6 +31,14 @@ export const deleteHabitFromGroup = (habitId, groupId) => {
     payload: { habitId, groupId }
   };
 };
+
+export const deleteGroup = groupId => {
+  return {
+    type: DELETE_GROUP,
+    payload: groupId
+  };
+};
+
 /*
 API CALLS
 */
@@ -89,6 +98,25 @@ export const deleteHabitFromGroupAPI = (habitId, groupId) => {
           groupIdDelete
         );
         dispatch(deleteHabitFromGroup(habitId, groupIdDelete));
+      });
+  };
+};
+
+export const deleteGroupAPI = groupId => {
+  console.log("checking group: ", groupId);
+
+  let deletedGroup = { groupId };
+
+  return dispatch => {
+    fetch(collectionsURL + "delete/" + groupId, {
+      headers: { "Content-Type": "application/json" },
+      method: "DELETE",
+      body: JSON.stringify(deletedGroup)
+    })
+      .then(response => response.json())
+      .then(groupIdDelete => {
+        console.log("successfully deleted group is: ", groupIdDelete);
+        dispatch(deleteGroup(groupIdDelete));
       });
   };
 };
