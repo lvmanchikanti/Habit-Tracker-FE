@@ -2,7 +2,8 @@ import {
   GET_EXISTING_GROUPS,
   CREATE_NEW_GROUP,
   DELETE_HABIT_FROM_GROUP,
-  DELETE_GROUP
+  DELETE_GROUP,
+  EDIT_GROUP
 } from "../constants/actionTypes.js";
 
 const collectionsURL = "http://localhost:8000/collections/";
@@ -35,6 +36,13 @@ export const deleteHabitFromGroup = (habitId, groupId) => {
 export const deleteGroup = groupId => {
   return {
     type: DELETE_GROUP,
+    payload: groupId
+  };
+};
+
+export const editGroup = groupId => {
+  return {
+    type: EDIT_GROUP,
     payload: groupId
   };
 };
@@ -117,6 +125,25 @@ export const deleteGroupAPI = groupId => {
       .then(groupIdDelete => {
         console.log("successfully deleted group is: ", groupIdDelete);
         dispatch(deleteGroup(groupIdDelete));
+      });
+  };
+};
+
+export const editGroupAPI = groupId => {
+  console.log("editing this group: ", groupId);
+
+  let editedGroup = { groupId };
+
+  return dispatch => {
+    fetch(collectionsURL + "update/" + groupId, {
+      headers: { "Content-Type": "application/json" },
+      method: "PUT",
+      body: JSON.stringify(editedGroup)
+    })
+      .then(response => response.json())
+      .then(groupIdEdit => {
+        console.log("successfully edited group is: ", groupIdEdit);
+        dispatch(editGroup(groupIdEdit));
       });
   };
 };

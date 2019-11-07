@@ -92,6 +92,7 @@ const App = props => {
             deleteHabitAPI={habitActions.deleteHabitAPI}
             deleteHabitFromGroup={groupActions.deleteHabitFromGroupAPI}
             deleteGroup={groupActions.deleteGroupAPI}
+            editGroup={groupActions.editGroupAPI}
           />
         </div>
       )}

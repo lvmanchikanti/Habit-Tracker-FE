@@ -8,6 +8,8 @@ const groupReducer = (state = initialState, action) => {
       return [...state, action.payload];
     case "DELETE_GROUP":
       return [...state, action.payload];
+    case "EDIT_GROUP":
+      return [...state, action.payload];
     default:
       return state;
   }

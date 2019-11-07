@@ -1,11 +1,15 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import EditGroup from "../EditGroup";
+//import { editGroupAPI } from "../../actions/groupActions";
 
 const GroupContainer = ({
   existingGroups,
   deleteHabitAPI,
   deleteHabitFromGroup,
-  deleteGroup
+  deleteGroup,
+  editGroup,
+  editGroupAPI
 }) => {
   return (
     <div>
@@ -20,6 +24,13 @@ const GroupContainer = ({
             >
               Delete Group
             </Button>
+
+            <EditGroup
+              onClick={() => {
+                editGroupAPI = { editGroupAPI };
+                //editGroup(group._id);
+              }}
+            />
             <h4>habit ids</h4>
             {group.habitIds.map(habitId => {
               return (
