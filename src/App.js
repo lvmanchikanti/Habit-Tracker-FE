@@ -8,10 +8,12 @@ import { connect } from "react-redux";
 // Import Redux Actions
 import * as GroupActions from "./actions/groupActions.js";
 import * as HabitActions from "./actions/habitActions.js";
+import * as UserActions from "./actions/userActions.js";
 
 // Import Components
 import CreateHabit from "./components/CreateHabit";
 import GroupContainer from "./components/GroupContainer";
+import CreateUser from "./components/CreateUser";
 
 // Import Material UI Components
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -19,10 +21,12 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const App = props => {
   const [groups, setGroups] = useState(props.existingGroups);
   const [habits, setHabits] = useState(props.habits);
+  const [users, setUsers] = useState(props.users);
 
-  // Fetch Habits and Groups from endpoint
+  // Fetch Habits and Groups from endpoint (TODO: standardized later so it's not localhost)
   const collectionsURL = "http://localhost:8000/collections/";
   const habitsURL = "http://localhost:8000/habits/";
+  const usersURL = "http://localhost:8000/users/"
 
   const fetchGroups = async () => {
     let response = await fetch(collectionsURL);
@@ -34,6 +38,13 @@ const App = props => {
     let response = await fetch(habitsURL);
     let data = await response.json();
     setHabits(data);
+  };
+
+  const fetchUsers = async () => {
+    let response = await fetch(usersURL);
+    let data = await response.json();
+    console.log(data)
+    setUsers(data);
   };
 
   /*
@@ -57,7 +68,7 @@ const App = props => {
   // setGroups(props.existingGroups);
   // setHabits(props.habits);
 
-  const { groupActions, habitActions } = props;
+  const { groupActions, habitActions, userActions } = props;
 
   return (
     <div>
@@ -101,14 +112,16 @@ const App = props => {
 const mapStateToProps = state => {
   return {
     existingGroups: state.groups,
-    habits: state.habits
+    habits: state.habits,
+    users: state.users
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     groupActions: bindActionCreators(GroupActions, dispatch),
-    habitActions: bindActionCreators(HabitActions, dispatch)
+    habitActions: bindActionCreators(HabitActions, dispatch),
+    userActions: bindActionCreators(UserActions, dispatch)
   };
 };
 
