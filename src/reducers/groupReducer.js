@@ -1,5 +1,3 @@
-import { ADD_HABITS_TO_GROUP } from "../constants/actionTypes";
-
 const initialState = [];
 
 const groupReducer = (state = initialState, action) => {
