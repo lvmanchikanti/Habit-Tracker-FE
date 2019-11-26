@@ -17,7 +17,7 @@ import GroupContainer from "../../components/GroupContainer";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Dashboard = props => {
-  const [groups, setGroups] = useState(props.existingGroups);
+  const [groups, setGroups] = useState(props.groups);
   const [habits, setHabits] = useState(props.habits);
 
   // Fetch Habits and Groups from endpoint
@@ -40,22 +40,27 @@ const Dashboard = props => {
   prevents infintie loops by depending on props.existingGroups and habits (which are redux states)
   instead of the groups and habits. we're setting groups and habits when we make these calls, so groups
   and habits can't be in the dependency array
-
   reload the page when we add/delete/update a habit or group through redux.
-
   automatically fetch the new data
-
   TODO: do what you did a walmart. change the data in the front end and make the change in the backend,
   but don't call the backend after each change. only change the redux state so it renders faster. next 
   time you load the page it will do an API call and that will get the updated data from the database
   */
   useEffect(() => {
-    fetchGroups();
-    fetchHabits();
-  }, [props.existingGroups, props.habits]);
+    // fetchGroups();
+    // fetchHabits();
+    props.groupActions.getExistingGroupsAPI(setGroups);
+    props.habitActions.getExistingHabitsAPI(setHabits);
+  }, []);
 
   // setGroups(props.existingGroups);
   // setHabits(props.habits);
+
+  console.log("props groups: ", props.groups);
+  console.log("props habits: ", props.habits);
+
+  console.log("state groups: ", groups);
+  console.log("state habits: ", habits);
 
   const { groupActions, habitActions } = props;
 
@@ -89,8 +94,9 @@ const Dashboard = props => {
 
           <GroupContainer
             existingGroups={groups}
-            deleteHabitAPI={habitActions.deleteHabitAPI}
+            deleteHabit={habitActions.deleteHabitAPI}
             deleteHabitFromGroup={groupActions.deleteHabitFromGroupAPI}
+            getAllHabitsInGroup={groupActions.getAllHabitsInGroupAPI}
           />
         </div>
       )}
@@ -100,7 +106,7 @@ const Dashboard = props => {
 
 const mapStateToProps = state => {
   return {
-    existingGroups: state.groups,
+    groups: state.groups,
     habits: state.habits
   };
 };
