@@ -1,3 +1,5 @@
+import { ADD_HABITS_TO_GROUP } from "../constants/actionTypes";
+
 const initialState = [];
 
 const groupReducer = (state = initialState, action) => {
@@ -9,29 +11,43 @@ const groupReducer = (state = initialState, action) => {
         ...state,
         currentGroups: [...state.currentGroups, action.payload]
       };
+
     case "ADD_HABITS_TO_GROUP":
-      console.log("add habit, state is: ", state);
+      //console.log("add habit, state is: ", state);
       console.log(action.payload);
+      let currentGroupsCopy = state.currentGroups.slice();
 
       //use action.payload.groupId to find group in the currentGroups state
-      let groupFound = state.currentGroups.find(
+      let groupFound = currentGroupsCopy.find(
         ({ _id }) => _id === action.payload.groupId
       );
       console.log(groupFound);
 
       //if habitObjects array doesn't exist add it to group
       if (!groupFound.habitObjects) {
-        groupFound.habitObjects = action.payload.habits;
+        groupFound.habitObjects = action.payload.habits.slice();
+      } else {
+        groupFound.habitObjects.push(action.payload.habits);
       }
 
       // console.log(groupFound);
 
       // //push new habit in to habit objects array
-      // groupFound.habitObjects.push(action.payload.habits);
+      // groupFound.habitObjects = [
+      //   ...groupFound.habitObjects,
+      //   action.payload.habits
+      // ];
 
-      console.log(groupFound);
+      console.log(state);
 
-      return "test";
+      // return Object.assign({}, state, {
+      //   currenGroups: currentGroupsCopy
+      // });
+
+      return {
+        ...state,
+        currentGroups: [...state.currentGroups]
+      };
     default:
       return state;
   }
