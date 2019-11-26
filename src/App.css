@@ -20,3 +20,14 @@ body {
   font-size: 14px;
   color: black;
 }
+.dashboard-container {
+  margin: 20px;
+  display: flex;
+}
+.dashboard-profile {
+  flex-grow: 1;
+}
+
+.dashboard-content {
+  flex-grow: 2;
+}

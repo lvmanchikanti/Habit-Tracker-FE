@@ -12,6 +12,8 @@ import * as HabitActions from "./actions/habitActions.js";
 // Import Components
 import CreateHabit from "./components/CreateHabit";
 import GroupContainer from "./components/GroupContainer";
+import Header from "./components/Header";
+import UserSideProfile from "./components/UserSideProfile";
 
 // Import Material UI Components
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -69,29 +71,35 @@ const App = props => {
 
       {(groups.length !== 0 || habits.length !== 0) && (
         <div>
-          <header>
-            <h1>Habit Tracker</h1>
-          </header>
-          <CreateHabit
-            existingGroups={groups}
-            createNewHabitAPI={habitActions.createNewHabitAPI}
-            createNewGroupAPI={groupActions.createNewGroupAPI}
-          />
-          <h1>Habits Created</h1>
-          {habits.map(habit => {
-            return (
-              <div key={habit._id}>
-                <h3>{habit.habitName}</h3>
-                <h3>{habit.habitGroup ? habit.habitGroup : ""}</h3>
-              </div>
-            );
-          })}
+          <Header />
+          <div className="dashboard-container">
+            <div className="dashboard-profile">
+              <UserSideProfile />
+            </div>
 
-          <GroupContainer
-            existingGroups={groups}
-            deleteHabitAPI={habitActions.deleteHabitAPI}
-            deleteHabitFromGroup={groupActions.deleteHabitFromGroupAPI}
-          />
+            <div className="dashboard-content">
+              <CreateHabit
+                existingGroups={groups}
+                createNewHabitAPI={habitActions.createNewHabitAPI}
+                createNewGroupAPI={groupActions.createNewGroupAPI}
+              />
+              {/* <h1>Habits Created</h1>
+              {habits.map(habit => {
+                return (
+                  <div key={habit._id}>
+                    <h3>{habit.habitName}</h3>
+                    <h3>{habit.habitGroup ? habit.habitGroup : ""}</h3>
+                  </div>
+                );
+              })} */}
+
+              <GroupContainer
+                existingGroups={groups}
+                deleteHabitAPI={habitActions.deleteHabitAPI}
+                deleteHabitFromGroup={groupActions.deleteHabitFromGroupAPI}
+              />
+            </div>
+          </div>
         </div>
       )}
     </div>
