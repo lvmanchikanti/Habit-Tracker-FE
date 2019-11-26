@@ -37,8 +37,9 @@ function TabPanel(props) {
 
 const GroupContainer = ({
   existingGroups,
-  deleteHabitAPI,
-  deleteHabitFromGroup
+  deleteHabit,
+  deleteHabitFromGroup,
+  getAllHabitsInGroup
 }) => {
   const classes = useStyles();
 
@@ -70,7 +71,7 @@ const GroupContainer = ({
                   <p>{habitId}</p>
                   <Button
                     onClick={() => {
-                      deleteHabitAPI(habitId);
+                      deleteHabit(habitId);
                       deleteHabitFromGroup(habitId, group._id);
                     }}
                   >

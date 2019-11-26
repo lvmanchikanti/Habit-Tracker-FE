@@ -37,12 +37,13 @@ API CALLS
 */
 
 // NOTE: May not need now that we fetch in App.js
-export const getExistingHabitsAPI = () => {
+export const getExistingHabitsAPI = setHabits => {
   return async dispatch => {
     let response = await fetch(habitsURL);
     let data = await response.json();
 
-    console.log(data);
+    //console.log(data);
+    setHabits(data);
 
     dispatch(getExistingHabits(data));
   };

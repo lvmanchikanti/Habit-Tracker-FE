@@ -1,15 +1,16 @@
 import {
   GET_EXISTING_GROUPS,
   CREATE_NEW_GROUP,
-  DELETE_HABIT_FROM_GROUP
+  DELETE_HABIT_FROM_GROUP,
+  ADD_HABITS_TO_GROUP
 } from "../constants/actionTypes.js";
 
 const collectionsURL = "http://localhost:8000/collections/";
+const habitsURL = "http://localhost:8000/habits/";
 
 /*
 REDUX ACTION
 */
-
 export const getExistingGroups = existingGroups => {
   return {
     type: GET_EXISTING_GROUPS,
@@ -24,10 +25,18 @@ export const createNewGroup = newGroup => {
   };
 };
 
+// NOTE: never used in reducer
 export const deleteHabitFromGroup = (habitId, groupId) => {
   return {
     type: DELETE_HABIT_FROM_GROUP,
     payload: { habitId, groupId }
+  };
+};
+
+export const addHabitsToGroup = (habits, groupId) => {
+  return {
+    type: ADD_HABITS_TO_GROUP,
+    payload: { habits, groupId }
   };
 };
 /*
@@ -36,12 +45,12 @@ API CALLS
 
 // NOTE: May not need now that we fetch in App.js
 
-export const getExistingGroupsAPI = () => {
+export const getExistingGroupsAPI = setGroups => {
   return async dispatch => {
     let response = await fetch(collectionsURL);
     let data = await response.json();
     //console.log(data);
-
+    setGroups(data);
     dispatch(getExistingGroups(data));
     // fetch(collectionsURL)
     //   .then(response => response.json())
@@ -89,6 +98,22 @@ export const deleteHabitFromGroupAPI = (habitId, groupId) => {
           groupIdDelete
         );
         dispatch(deleteHabitFromGroup(habitId, groupIdDelete));
+      });
+  };
+};
+
+export const getAllHabitsInGroupAPI = (habitIdList, groupId) => {
+  console.log("check here");
+  return dispatch => {
+    fetch(habitsURL + "getMany", {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(habitIdList)
+    })
+      .then(response => response.json())
+      .then(habits => {
+        console.log(habits);
+        dispatch(addHabitsToGroup(habits, groupId));
       });
   };
 };
