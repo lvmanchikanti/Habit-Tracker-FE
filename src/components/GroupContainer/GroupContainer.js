@@ -5,6 +5,11 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
+import FriendDropdown from "../FriendDropdown";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import IndividualHabit from "../IndividualHabit";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,6 +20,13 @@ const useStyles = makeStyles(theme => ({
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`
+  },
+  expansion: {
+    width: 400,
+    marginBottom: 5
+  },
+  deleteButton: {
+    marginTop: 20
   }
 }));
 
@@ -64,7 +76,7 @@ const GroupContainer = ({
           return (
             <Tab
               label={group.name}
-              onClick={() => getAllHabitsInGroup(group.habitIds, group._id)}
+              //onClick={() => getAllHabitsInGroup(group.habitIds, group._id)}
             />
           );
         })}
@@ -72,41 +84,57 @@ const GroupContainer = ({
       {existingGroups.map((group, index) => {
         return (
           <TabPanel value={value} index={index}>
-            <Button
+            {/* <Button
               color="secondary"
               onClick={() => getAllHabitsInGroup(group.habitIds, group._id)}
             >
               show habits
-            </Button>
+            </Button> */}
+            <div className={classes.expansion}>
+              <ExpansionPanel>
+                <ExpansionPanelSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-label="Expand"
+                  aria-controls="additional-actions1-content"
+                  id="additional-actions1-header"
+                  onClick={() => getAllHabitsInGroup(group.habitIds, group._id)}
+                >
+                  <h6>Your Habits</h6>
+                </ExpansionPanelSummary>
+                <div className="friend-dropdown-habits">
+                  <div>
+                    {group.habitObjects &&
+                      group.habitObjects.map(habit => {
+                        if (habit.habitName != null) {
+                          return (
+                            <IndividualHabit
+                              habitName={habit.habitName}
+                              progress={25}
+                              deleteHabit={() => {
+                                deleteHabitAPI(habit._id);
+                                deleteHabitFromGroup(
+                                  habit._id,
+                                  habit.collectionId
+                                );
+                              }}
+                            />
+                          );
+                        }
+                      })}
+                  </div>
+                </div>
+              </ExpansionPanel>
+            </div>
+            <FriendDropdown />
             <Button
               color="secondary"
               onClick={() => {
                 deleteGroup(group._id);
               }}
+              className={classes.deleteButton}
             >
               Delete Group
             </Button>
-            {group.habitObjects && (
-              <div>
-                {group.habitObjects.map(habit => {
-                  if (habit.habitName != null) {
-                    return (
-                      <div>
-                        <h1>{habit.habitName}</h1>
-                        <Button
-                          onClick={() => {
-                            deleteHabitAPI(habit._id);
-                            deleteHabitFromGroup(habit._id, habit.collectionId);
-                          }}
-                        >
-                          Delete Habit
-                        </Button>
-                      </div>
-                    );
-                  }
-                })}
-              </div>
-            )}
           </TabPanel>
         );
       })}
@@ -115,3 +143,21 @@ const GroupContainer = ({
 };
 
 export default GroupContainer;
+
+/*
+deleteButton={
+                                <Button
+                                  variant="outlined"
+                                  size="small"
+                                  onClick={() => {
+                                    deleteHabitAPI(habit._id);
+                                    deleteHabitFromGroup(
+                                      habit._id,
+                                      habit.collectionId
+                                    );
+                                  }}
+                                >
+                                  Delete Habit
+                                </Button>
+                              }
+                              */
