@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -40,7 +40,6 @@ const GroupContainer = ({
   deleteHabitAPI,
   deleteHabitFromGroup,
   deleteGroup,
-  deleteHabit,
   getAllHabitsInGroup
 }) => {
   const classes = useStyles();
@@ -50,13 +49,6 @@ const GroupContainer = ({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  // useEffect(() => {
-  //   existingGroups.forEach(group => {
-  //     console.log("current group: ", group.name);
-  //     getAllHabitsInGroup(group.habitIds, group._id);
-  //   });
-  // }, []);
 
   return (
     <div className={classes.root}>
@@ -78,7 +70,6 @@ const GroupContainer = ({
         })}
       </Tabs>
       {existingGroups.map((group, index) => {
-        //getAllHabitsInGroup(group.habitIds, group._id)
         return (
           <TabPanel value={value} index={index}>
             <Button
@@ -116,22 +107,6 @@ const GroupContainer = ({
                 })}
               </div>
             )}
-            {/* {group.habitObjects == null && <h2>No Habits Yet</h2>} */}
-            {/* group.habitIds.map(habitId => {
-                return (
-                  <div key={habitId}>
-                    <p>{habitId}</p>
-                    <Button
-                      onClick={() => {
-                        deleteHabitAPI(habitId);
-                        deleteHabitFromGroup(habitId, group._id);
-                      }}
-                    >
-                      Delete Habit
-                    </Button>
-                  </div>
-                );
-              })} */}
           </TabPanel>
         );
       })}
