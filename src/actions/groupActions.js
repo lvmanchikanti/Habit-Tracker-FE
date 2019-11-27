@@ -3,15 +3,15 @@ import {
   CREATE_NEW_GROUP,
   DELETE_HABIT_FROM_GROUP,
   DELETE_GROUP,
-  EDIT_GROUP
+  ADD_HABITS_TO_GROUP
 } from "../constants/actionTypes.js";
 
 const collectionsURL = "http://localhost:8000/collections/";
+const habitsURL = "http://localhost:8000/habits/";
 
 /*
 REDUX ACTION
 */
-
 export const getExistingGroups = existingGroups => {
   return {
     type: GET_EXISTING_GROUPS,
@@ -26,6 +26,7 @@ export const createNewGroup = newGroup => {
   };
 };
 
+// NOTE: never used in reducer
 export const deleteHabitFromGroup = (habitId, groupId) => {
   return {
     type: DELETE_HABIT_FROM_GROUP,
@@ -40,25 +41,24 @@ export const deleteGroup = groupId => {
   };
 };
 
-export const editGroup = groupId => {
+export const addHabitsToGroup = (habits, groupId) => {
   return {
-    type: EDIT_GROUP,
-    payload: groupId
+    type: ADD_HABITS_TO_GROUP,
+    payload: { habits, groupId }
   };
 };
-
 /*
 API CALLS
 */
 
 // NOTE: May not need now that we fetch in App.js
 
-export const getExistingGroupsAPI = () => {
+export const getExistingGroupsAPI = setGroups => {
   return async dispatch => {
     let response = await fetch(collectionsURL);
     let data = await response.json();
     //console.log(data);
-
+    setGroups(data);
     dispatch(getExistingGroups(data));
     // fetch(collectionsURL)
     //   .then(response => response.json())
@@ -129,21 +129,18 @@ export const deleteGroupAPI = groupId => {
   };
 };
 
-export const editGroupAPI = groupId => {
-  console.log("editing this group: ", groupId);
-
-  let editedGroup = { groupId };
-
+export const getAllHabitsInGroupAPI = (habitIdList, groupId) => {
+  console.log("check here");
   return dispatch => {
-    fetch(collectionsURL + "update/" + groupId, {
+    fetch(habitsURL + "getMany", {
       headers: { "Content-Type": "application/json" },
-      method: "PUT",
-      body: JSON.stringify(editedGroup)
+      method: "POST",
+      body: JSON.stringify(habitIdList)
     })
       .then(response => response.json())
-      .then(groupIdEdit => {
-        console.log("successfully edited group is: ", groupIdEdit);
-        dispatch(editGroup(groupIdEdit));
+      .then(habits => {
+        console.log(habits);
+        dispatch(addHabitsToGroup(habits, groupId));
       });
   };
 };
