@@ -96,6 +96,7 @@ const Dashboard = props => {
             existingGroups={groups}
             deleteHabit={habitActions.deleteHabitAPI}
             deleteHabitFromGroup={groupActions.deleteHabitFromGroupAPI}
+            deleteGroup={groupActions.deleteGroupAPI}
             getAllHabitsInGroup={groupActions.getAllHabitsInGroupAPI}
           />
         </div>
@@ -118,7 +119,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

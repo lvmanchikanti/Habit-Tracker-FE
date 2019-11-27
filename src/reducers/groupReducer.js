@@ -9,6 +9,11 @@ const groupReducer = (state = initialState, action) => {
         ...state,
         currentGroups: [...state.currentGroups, action.payload]
       };
+    case "DELETE_GROUP":
+      return {
+        // ...state,
+        currentGroups: [...state.currentGroups, action.payload]
+      };
 
     case "ADD_HABITS_TO_GROUP":
       //console.log("add habit, state is: ", state);
