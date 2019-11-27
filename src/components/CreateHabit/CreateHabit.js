@@ -1,17 +1,26 @@
 import React, { useState } from "react";
-import { Button, Modal } from "reactstrap";
+import { Modal } from "reactstrap";
 import CreateGroup from "../CreateGroup";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import TextField from "@material-ui/core/TextField";
 import ButtonUI from "@material-ui/core/Button";
 import Select from "react-select";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+  blueButton: {
+    backgroundolor: "#3f51b5"
+  }
+}));
 
 const CreateHabit = ({
   existingGroups,
   createNewHabitAPI,
   createNewGroupAPI
 }) => {
+  const classes = useStyles();
+
   const [modalOpen, setModalOpen] = useState(false);
   const [showCreateGroup, setShowCreateGroup] = useState(false);
   const [newHabit, setNewHabit] = useState({
@@ -33,9 +42,13 @@ const CreateHabit = ({
   };
   return (
     <>
-      <Button color="primary" type="button" onClick={() => setModalOpen(true)}>
+      <ButtonUI
+        color="primary"
+        variant="contained"
+        onClick={() => setModalOpen(true)}
+      >
         Create Habit
-      </Button>
+      </ButtonUI>
       <Modal
         className="modal-dialog-centered"
         isOpen={modalOpen}
