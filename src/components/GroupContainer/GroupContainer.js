@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -37,7 +37,7 @@ function TabPanel(props) {
 
 const GroupContainer = ({
   existingGroups,
-  deleteHabit,
+  deleteHabitAPI,
   deleteHabitFromGroup,
   getAllHabitsInGroup
 }) => {
@@ -48,6 +48,14 @@ const GroupContainer = ({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  // useEffect(() => {
+  //   existingGroups.forEach(group => {
+  //     console.log("current group: ", group.name);
+  //     getAllHabitsInGroup(group.habitIds, group._id);
+  //   });
+  // }, []);
+
   return (
     <div className={classes.root}>
       <Tabs
@@ -59,27 +67,61 @@ const GroupContainer = ({
         className={classes.tabs}
       >
         {existingGroups.map(group => {
-          return <Tab label={group.name} />;
+          return (
+            <Tab
+              label={group.name}
+              onClick={() => getAllHabitsInGroup(group.habitIds, group._id)}
+            />
+          );
         })}
       </Tabs>
       {existingGroups.map((group, index) => {
+        //getAllHabitsInGroup(group.habitIds, group._id)
         return (
           <TabPanel value={value} index={index}>
-            {group.habitIds.map(habitId => {
-              return (
-                <div key={habitId}>
-                  <p>{habitId}</p>
-                  <Button
-                    onClick={() => {
-                      deleteHabit(habitId);
-                      deleteHabitFromGroup(habitId, group._id);
-                    }}
-                  >
-                    Delete Habit
-                  </Button>
-                </div>
-              );
-            })}
+            <Button
+              color="secondary"
+              onClick={() => getAllHabitsInGroup(group.habitIds, group._id)}
+            >
+              show habits
+            </Button>
+            {group.habitObjects && (
+              <div>
+                {group.habitObjects.map(habit => {
+                  if (habit.habitName != null) {
+                    return (
+                      <div>
+                        <h1>{habit.habitName}</h1>
+                        <Button
+                          onClick={() => {
+                            deleteHabitAPI(habit._id);
+                            deleteHabitFromGroup(habit._id, habit.collectionId);
+                          }}
+                        >
+                          Delete Habit
+                        </Button>
+                      </div>
+                    );
+                  }
+                })}
+              </div>
+            )}
+            {/* {group.habitObjects == null && <h2>No Habits Yet</h2>} */}
+            {/* group.habitIds.map(habitId => {
+                return (
+                  <div key={habitId}>
+                    <p>{habitId}</p>
+                    <Button
+                      onClick={() => {
+                        deleteHabitAPI(habitId);
+                        deleteHabitFromGroup(habitId, group._id);
+                      }}
+                    >
+                      Delete Habit
+                    </Button>
+                  </div>
+                );
+              })} */}
           </TabPanel>
         );
       })}
@@ -88,36 +130,3 @@ const GroupContainer = ({
 };
 
 export default GroupContainer;
-
-/*
-{
-  existingGroups.map(group => {
-    return (
-      <div className="group-container" key={group._id}>
-        <h1>{group.name}</h1>
-        <h4>habit ids</h4>
-        {group.habitIds.map(habitId => {
-          return (
-            <div key={habitId}>
-              <p>{habitId}</p>
-              <Button
-                onClick={() => {
-                  deleteHabitAPI(habitId);
-                  deleteHabitFromGroup(habitId, group._id);
-                }}
-              >
-                Delete Habit
-              </Button>
-            </div>
-          );
-        })}
-
-        <h4>user ids</h4>
-        {group.userIds.map(userId => {
-          return <p key={userId}>{userId}</p>;
-        })}
-      </div>
-    );
-  });
-}
-*/

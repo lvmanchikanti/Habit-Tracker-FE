@@ -49,9 +49,12 @@ export const getExistingGroupsAPI = setGroups => {
   return async dispatch => {
     let response = await fetch(collectionsURL);
     let data = await response.json();
-    //console.log(data);
+    console.log(data);
+
     setGroups(data);
+
     dispatch(getExistingGroups(data));
+
     // fetch(collectionsURL)
     //   .then(response => response.json())
     //   .then(data => {
