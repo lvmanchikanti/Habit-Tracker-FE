@@ -6,6 +6,8 @@ const userReducer = (state = initialState, action) => {
       return [...state, action.payload];
     case "GET_EXISTING_USERS":
       return action.payload;
+    case "LOGIN_USER":
+        return action.payload;
     default:
       return state;
   }

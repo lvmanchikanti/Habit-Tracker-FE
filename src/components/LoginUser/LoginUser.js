@@ -3,13 +3,12 @@ import { Button, Modal } from "reactstrap";
 import TextField from "@material-ui/core/TextField";
 import ButtonUI from "@material-ui/core/Button";
 
-const CreateUser = ({
-    createNewUserAPI
+const LoginUser = ({
+    loginUserAPI,
+    history
 }) => {
     const [modalOpen, setModalOpen] = useState(false);
-    const [newUser, setNewUser] = useState({
-        name: "",
-        username: "",
+    const [loginUser, setLogInUser] = useState({
         email: "",
         password: ""
       });
@@ -17,13 +16,13 @@ const CreateUser = ({
       const handleUserChange = (event, name) => {
         //name change
         if (event.target) {
-          setNewUser({ ...newUser, [event.target.name]: event.target.value });
+          setLogInUser({ ...loginUser, [event.target.name]: event.target.value });
         }
       };
   return(
     <>
       <Button color="primary" type="button" onClick={() => setModalOpen(true)}>
-        Register
+        Login
       </Button>
       <Modal
         className="modal-dialog-centered"
@@ -32,7 +31,7 @@ const CreateUser = ({
       >
         <div className="modal-header">
           <h5 className="modal-title" id="exampleModalLabel">
-            Register
+            Login
           </h5>
           <button
             aria-label="Close"
@@ -47,28 +46,10 @@ const CreateUser = ({
         <div className="modal-body">
           <form className="create-habit-modal-form">
           <TextField
-            id="name"
-            label="Full Name"
-            name="name"
-            value={newUser.name}
-            onChange={event => handleUserChange(event)}
-            margin="normal"
-            variant="outlined"
-            />
-          <TextField
-            id="username"
-            label="Username"
-            name="username"
-            value={newUser.username}
-            onChange={event => handleUserChange(event)}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
             id="email"
             label="Email"
             name="email"
-            value={newUser.email}
+            value={loginUser.email}
             onChange={event => handleUserChange(event)}
             margin="normal"
             variant="outlined"
@@ -78,7 +59,7 @@ const CreateUser = ({
             label="Password"
             name="password"
             type="password"
-            value={newUser.password}
+            value={loginUser.password}
             onChange={event => handleUserChange(event)}
             margin="normal"
             variant="outlined"
@@ -100,21 +81,13 @@ const CreateUser = ({
             type="button"
             variant="outlined"
             onClick={() => {
-              console.log(newUser);
-              createNewUserAPI(newUser);
-              //reset values in newUser
-              setNewUser({
-                name: "",
-                username: "",
-                email: "",
-                password: ""
-              });
+              loginUserAPI(loginUser)
+              history.push(`/profile`)
               setModalOpen(false);
-              
               //TODO: login user and redirect to dashboard
             }}
           >
-            Sign Up
+            Login
           </ButtonUI>
         </div>
       </Modal>
@@ -123,4 +96,4 @@ const CreateUser = ({
 
 };
 
-export default CreateUser;
+export default LoginUser;

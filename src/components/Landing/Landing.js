@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { withRouter } from 'react-router'
 
 //This page handles fetching users from DB, button for sign up w/ modal, button for login w/ modal
 
@@ -11,6 +12,7 @@ import { connect } from "react-redux";
 
 //Import Components
 import CreateUser from "../../components/CreateUser";
+import LoginUser from "../LoginUser/LoginUser.js";
  
 const Landing = props => {
     const [users, setUsers] = useState(props.users);
@@ -41,6 +43,10 @@ const Landing = props => {
             <CreateUser
                 createNewUserAPI={userActions.createNewUserAPI}
             />
+            <LoginUser
+                loginUserAPI={userActions.loginUserAPI}
+                history={props.history}
+            />
             <h2>Users</h2>
             {users && users.map(user => {
                 return (
@@ -65,7 +71,7 @@ return {
 };
 };
   
-export default connect(
+export default withRouter(connect(
 mapStateToProps,
 mapDispatchToProps
-)(Landing);
+)(Landing));

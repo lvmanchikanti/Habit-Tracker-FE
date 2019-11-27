@@ -1,7 +1,7 @@
 import {
     CREATE_NEW_USER,
     GET_EXISTING_USERS,
-    DELETE_USER
+    LOGIN_USER
   } from "../constants/actionTypes.js";
   
   const usersURL = "http://localhost:8000/users/";
@@ -22,6 +22,13 @@ import {
     return {
       type: GET_EXISTING_USERS,
       payload: existingUsers
+    };
+  };
+
+  export const loginUser = loginUser => {
+    return {
+      type: LOGIN_USER,
+      payload: loginUser
     };
   };
   
@@ -54,6 +61,17 @@ import {
             dispatch(createNewUser(data));
           }
         });
+    };
+  };
+
+  export const loginUserAPI = loginUser => {
+    return dispatch => {
+      fetch(usersURL + "login", {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        body: JSON.stringify(loginUser)
+      })
+        .then(response => localStorage.setItem('usertoken', response.data));
     };
   };
   
