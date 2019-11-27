@@ -39,6 +39,8 @@ const GroupContainer = ({
   existingGroups,
   deleteHabitAPI,
   deleteHabitFromGroup,
+  deleteGroup,
+  deleteHabit,
   getAllHabitsInGroup
 }) => {
   const classes = useStyles();
@@ -84,6 +86,14 @@ const GroupContainer = ({
               onClick={() => getAllHabitsInGroup(group.habitIds, group._id)}
             >
               show habits
+            </Button>
+            <Button
+              color="secondary"
+              onClick={() => {
+                deleteGroup(group._id);
+              }}
+            >
+              Delete Group
             </Button>
             {group.habitObjects && (
               <div>

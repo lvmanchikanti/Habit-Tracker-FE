@@ -96,6 +96,7 @@ const Dashboard = props => {
                 existingGroups={groups}
                 deleteHabitAPI={habitActions.deleteHabitAPI}
                 deleteHabitFromGroup={groupActions.deleteHabitFromGroupAPI}
+                deleteGroup={groupActions.deleteGroupAPI}
                 getAllHabitsInGroup={groupActions.getAllHabitsInGroupAPI}
               />
             </div>
