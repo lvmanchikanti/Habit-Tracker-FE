@@ -1,4 +1,6 @@
-const initialState = [];
+const initialState = {
+  habitCount: 0
+};
 
 const habitReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,6 +10,8 @@ const habitReducer = (state = initialState, action) => {
       return action.payload;
     case "DELETE_HABIT":
       return state.filter(habitId => habitId !== action.payload);
+    case "INCREMENT_HABITS":
+      return state.habitCount + 1;
     default:
       return state;
   }

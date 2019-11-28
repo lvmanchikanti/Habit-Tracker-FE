@@ -1,7 +1,8 @@
 import {
   CREATE_NEW_HABIT,
   GET_EXISTING_HABITS,
-  DELETE_HABIT
+  DELETE_HABIT,
+  INCREMENT_HABITS
 } from "../constants/actionTypes.js";
 
 const habitsURL = "http://localhost:8000/habits/";
@@ -29,6 +30,14 @@ export const deleteHabit = deletedHabitId => {
   return {
     type: DELETE_HABIT,
     payload: deletedHabitId
+  };
+};
+
+export const incrementHabits = habitCount => {
+  console.log("habit Count:" + habitCount)
+  return {
+    type: INCREMENT_HABITS,
+    payload: habitCount
   };
 };
 

@@ -50,9 +50,12 @@ const Dashboard = props => {
 
   console.log("props groups: ", props.groups);
   console.log("props habits: ", props.habits);
+  console.log("props habit count: ", props.habits.habitCount);
 
   console.log("state groups: ", groups);
   console.log("state habits: ", habits);
+  console.log("props habit count: ", habits.habitCount);
+
 
   const { groupActions, habitActions } = props;
 
@@ -69,7 +72,9 @@ const Dashboard = props => {
           <Header />
           <div className="dashboard-container">
             <div className="dashboard-profile">
-              <UserSideProfile />
+              <UserSideProfile 
+                habitCount={props.habitCount}
+              />
             </div>
 
             <div className="dashboard-content">
@@ -77,6 +82,7 @@ const Dashboard = props => {
                 existingGroups={groups}
                 createNewHabitAPI={habitActions.createNewHabitAPI}
                 createNewGroupAPI={groupActions.createNewGroupAPI}
+                incrementHabit={habitActions.incrementHabits}
               />
               <GroupContainer
                 existingGroups={groups}
@@ -94,9 +100,11 @@ const Dashboard = props => {
 };
 
 const mapStateToProps = state => {
+  console.log(state);
   return {
     groups: state.groups,
-    habits: state.habits
+    habits: state.habits,
+    habitCount: state.habits.habitCount
   };
 };
 

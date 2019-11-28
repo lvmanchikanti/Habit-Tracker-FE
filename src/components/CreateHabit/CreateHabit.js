@@ -10,7 +10,8 @@ import Select from "react-select";
 const CreateHabit = ({
   existingGroups,
   createNewHabitAPI,
-  createNewGroupAPI
+  createNewGroupAPI,
+  incrementHabits
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [showCreateGroup, setShowCreateGroup] = useState(false);
@@ -125,6 +126,9 @@ const CreateHabit = ({
                 habitGroupName: ""
               });
               setModalOpen(false);
+              //fire off action to increment habit
+              incrementHabits();
+
             }}
             disabled={showCreateGroup}
           >
