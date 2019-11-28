@@ -26,9 +26,9 @@ const Dashboard = props => {
     habitActions.getExistingHabitsAPI();
   }, []);
 
-  console.log("props groups: ", props.groups);
-  console.log("props habits: ", props.habits);
-  console.log("props habit count: ", props.habits.habitCount);
+  console.log("props groups: ", groups);
+  console.log("props habits: ", habits);
+  console.log("props habit count: ", habits.habitCount);
 
   return (
     <div>

@@ -1,4 +1,6 @@
-const initialState = [];
+const initialState = {
+  currentGroups: []
+};
 
 const groupReducer = (state = initialState, action) => {
   switch (action.type) {
