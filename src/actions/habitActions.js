@@ -1,8 +1,10 @@
 import {
   CREATE_NEW_HABIT,
   GET_EXISTING_HABITS,
-  DELETE_HABIT
+  DELETE_HABIT,
+  DELETE_ALL_HABITS_FROM_GROUP
 } from "../constants/actionTypes.js";
+import { addHabitIdToGroup } from "./groupActions.js";
 
 const habitsURL = "http://localhost:8000/habits/";
 
@@ -32,6 +34,12 @@ export const deleteHabit = deletedHabitId => {
   };
 };
 
+export const deleteAllHabitsFromGroup = groupId => {
+  return {
+    type: DELETE_ALL_HABITS_FROM_GROUP,
+    payload: groupId
+  };
+};
 /*
 API CALLS
 */
@@ -41,9 +49,7 @@ export const getExistingHabitsAPI = setHabits => {
   return async dispatch => {
     let response = await fetch(habitsURL);
     let data = await response.json();
-
-    //console.log(data);
-    setHabits(data);
+    //setHabits(data);
 
     dispatch(getExistingHabits(data));
   };
@@ -60,6 +66,7 @@ export const createNewHabitAPI = newHabit => {
       .then(data => {
         if (data.name !== "MongoError") {
           dispatch(createNewHabit(data));
+          dispatch(addHabitIdToGroup(data.habit._id, data.habit.collectionId));
         }
       });
   };
@@ -74,7 +81,6 @@ export const deleteHabitAPI = habitId => {
     })
       .then(response => response.json())
       .then(deletedHabitId => {
-        console.log("successfully deleted habit is: ", deletedHabitId);
         dispatch(deleteHabit(deletedHabitId));
       });
   };
