@@ -84,12 +84,6 @@ const GroupContainer = ({
       {existingGroups.map((group, index) => {
         return (
           <TabPanel value={value} index={index}>
-            {/* <Button
-              color="secondary"
-              onClick={() => getAllHabitsInGroup(group.habitIds, group._id)}
-            >
-              show habits
-            </Button> */}
             <div className={classes.expansion}>
               <ExpansionPanel>
                 <ExpansionPanelSummary
@@ -143,21 +137,3 @@ const GroupContainer = ({
 };
 
 export default GroupContainer;
-
-/*
-deleteButton={
-                                <Button
-                                  variant="outlined"
-                                  size="small"
-                                  onClick={() => {
-                                    deleteHabitAPI(habit._id);
-                                    deleteHabitFromGroup(
-                                      habit._id,
-                                      habit.collectionId
-                                    );
-                                  }}
-                                >
-                                  Delete Habit
-                                </Button>
-                              }
-                              */
