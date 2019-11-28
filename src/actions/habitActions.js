@@ -33,11 +33,9 @@ export const deleteHabit = deletedHabitId => {
   };
 };
 
-export const incrementHabits = habitCount => {
-  console.log("habit Count:" + habitCount)
+export const incrementHabits = () => {
   return {
-    type: INCREMENT_HABITS,
-    payload: habitCount
+    type: INCREMENT_HABITS
   };
 };
 

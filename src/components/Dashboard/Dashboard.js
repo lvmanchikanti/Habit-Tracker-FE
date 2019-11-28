@@ -52,10 +52,9 @@ const Dashboard = props => {
   console.log("props habits: ", props.habits);
   console.log("props habit count: ", props.habits.habitCount);
 
-  console.log("state groups: ", groups);
-  console.log("state habits: ", habits);
-  console.log("props habit count: ", habits.habitCount);
-
+  // console.log("state groups: ", groups);
+  // console.log("state habits: ", habits);
+  // console.log("props habit count: ", habits.habitCount);
 
   const { groupActions, habitActions } = props;
 
@@ -72,9 +71,7 @@ const Dashboard = props => {
           <Header />
           <div className="dashboard-container">
             <div className="dashboard-profile">
-              <UserSideProfile 
-                habitCount={props.habitCount}
-              />
+              <UserSideProfile habitCount={props.habits.habitCount} />
             </div>
 
             <div className="dashboard-content">

@@ -11,7 +11,7 @@ const CreateHabit = ({
   existingGroups,
   createNewHabitAPI,
   createNewGroupAPI,
-  incrementHabits
+  incrementHabit
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [showCreateGroup, setShowCreateGroup] = useState(false);
@@ -127,8 +127,7 @@ const CreateHabit = ({
               });
               setModalOpen(false);
               //fire off action to increment habit
-              incrementHabits();
-
+              incrementHabit();
             }}
             disabled={showCreateGroup}
           >

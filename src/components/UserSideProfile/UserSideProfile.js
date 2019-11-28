@@ -19,9 +19,9 @@ const useStyles = makeStyles(theme => ({
     fontSize: 12
   }
 }));
-const UserSideProfile = ({habitCount}) => {
+const UserSideProfile = ({ habitCount }) => {
   const classes = useStyles();
-  console.log(habitCount)
+  console.log(habitCount);
 
   return (
     <Card className="user-side-profile-container">
