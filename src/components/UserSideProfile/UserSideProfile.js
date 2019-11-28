@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     fontSize: 12
   }
 }));
-const UserSideProfile = () => {
+const UserSideProfile = ({ habitCount }) => {
   const classes = useStyles();
 
   return (
@@ -29,7 +29,7 @@ const UserSideProfile = () => {
         <Avatar className={classes.bigAvatar}>CM</Avatar>
         <h3>Cynthia Mo</h3>
         <h6>Number of Habits</h6>
-        <h6>128</h6>
+        <h6>{habitCount}</h6>
         <h6>Longest Streak</h6>
         <h6>43</h6>
         <h6>Friends</h6>

@@ -2,6 +2,7 @@ import {
   CREATE_NEW_HABIT,
   GET_EXISTING_HABITS,
   DELETE_HABIT,
+  INCREMENT_HABITS,
   DELETE_ALL_HABITS_FROM_GROUP
 } from "../constants/actionTypes.js";
 import { addHabitIdToGroup } from "./groupActions.js";
@@ -31,6 +32,12 @@ export const deleteHabit = deletedHabitId => {
   return {
     type: DELETE_HABIT,
     payload: deletedHabitId
+  };
+};
+
+export const incrementHabits = () => {
+  return {
+    type: INCREMENT_HABITS
   };
 };
 

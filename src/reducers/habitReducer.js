@@ -1,27 +1,26 @@
-const initialState = [];
+const initialState = {
+  habitCount: 0,
+  currentHabits: []
+};
 
 const habitReducer = (state = initialState, action) => {
   switch (action.type) {
     case "CREATE_NEW_HABIT":
-      return [...state, action.payload.habit];
-
-    case "GET_EXISTING_HABITS":
-      return action.payload;
-
-    case "DELETE_HABIT":
-      return state.filter(habit => habit._id !== action.payload._id);
-
-    case "DELETE_ALL_HABITS_FROM_GROUP":
-      let stateCopy = [...state];
-
-      const removeFromArray = (original, remove) => {
-        return original.filter(value => !remove.includes(value._id));
+      return {
+        ...state,
+        currentHabits: [...state.currentHabits, action.payload]
       };
-
-      let newHabitState = removeFromArray(stateCopy, action.payload);
-
-      return newHabitState;
-
+    case "GET_EXISTING_HABITS":
+      return { ...state, currentHabits: action.payload };
+    case "DELETE_HABIT":
+      return {
+        ...state,
+        currentHabits: state.currentHabits.filter(
+          habitId => habitId !== action.payload
+        )
+      };
+    case "INCREMENT_HABITS":
+      return { ...state, habitCount: state.habitCount + 1 };
     default:
       return state;
   }
