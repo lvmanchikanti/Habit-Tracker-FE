@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Dashboard.css";
 
 // Import Redux
@@ -19,42 +19,15 @@ import UserSideProfile from "../../components/UserSideProfile";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Dashboard = props => {
-  const [groups, setGroups] = useState(props.groups);
-  const [habits, setHabits] = useState(props.habits);
-
-  // Fetch Habits and Groups from endpoint
-  const collectionsURL = "http://localhost:8000/collections/";
-  const habitsURL = "http://localhost:8000/habits/";
-
-  const fetchGroups = async () => {
-    let response = await fetch(collectionsURL);
-    let data = await response.json();
-    setGroups(data);
-  };
-
-  const fetchHabits = async () => {
-    let response = await fetch(habitsURL);
-    let data = await response.json();
-    setHabits(data);
-  };
+  const { groupActions, habitActions, groups, habits } = props;
 
   useEffect(() => {
-    // fetchGroups();
-    // fetchHabits();
-    props.groupActions.getExistingGroupsAPI(setGroups);
-    props.habitActions.getExistingHabitsAPI(setHabits);
+    groupActions.getExistingGroupsAPI();
+    habitActions.getExistingHabitsAPI();
   }, []);
-
-  // setGroups(props.existingGroups);
-  // setHabits(props.habits);
 
   console.log("props groups: ", props.groups);
   console.log("props habits: ", props.habits);
-
-  console.log("state groups: ", groups);
-  console.log("state habits: ", habits);
-
-  const { groupActions, habitActions } = props;
 
   return (
     <div>
@@ -74,16 +47,17 @@ const Dashboard = props => {
 
             <div className="dashboard-content">
               <CreateHabit
-                existingGroups={groups}
+                existingGroups={groups.currentGroups}
                 createNewHabitAPI={habitActions.createNewHabitAPI}
                 createNewGroupAPI={groupActions.createNewGroupAPI}
               />
               <GroupContainer
-                existingGroups={groups}
+                existingGroups={groups.currentGroups}
                 deleteHabitAPI={habitActions.deleteHabitAPI}
                 deleteHabitFromGroup={groupActions.deleteHabitFromGroupAPI}
                 deleteGroup={groupActions.deleteGroupAPI}
                 getAllHabitsInGroup={groupActions.getAllHabitsInGroupAPI}
+                deleteAllHabitsFromGroup={habitActions.deleteAllHabitsFromGroup}
               />
             </div>
           </div>

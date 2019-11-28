@@ -3,7 +3,8 @@ import {
   CREATE_NEW_GROUP,
   DELETE_HABIT_FROM_GROUP,
   DELETE_GROUP,
-  ADD_HABITS_TO_GROUP
+  ADD_HABITS_TO_GROUP,
+  ADD_HABIT_ID_TO_GROUP
 } from "../constants/actionTypes.js";
 
 const collectionsURL = "http://localhost:8000/collections/";
@@ -28,6 +29,7 @@ export const createNewGroup = newGroup => {
 
 // NOTE: never used in reducer
 export const deleteHabitFromGroup = (habitId, groupId) => {
+  console.log("check");
   return {
     type: DELETE_HABIT_FROM_GROUP,
     payload: { habitId, groupId }
@@ -47,6 +49,13 @@ export const addHabitsToGroup = (habits, groupId) => {
     payload: { habits, groupId }
   };
 };
+
+export const addHabitIdToGroup = (habitId, groupId) => {
+  return {
+    type: ADD_HABIT_ID_TO_GROUP,
+    payload: { habitId, groupId }
+  };
+};
 /*
 API CALLS
 */
@@ -57,10 +66,7 @@ export const getExistingGroupsAPI = setGroups => {
   return async dispatch => {
     let response = await fetch(collectionsURL);
     let data = await response.json();
-    console.log(data);
-
-    setGroups(data);
-
+    //setGroups(data);
     dispatch(getExistingGroups(data));
   };
 };
@@ -93,14 +99,8 @@ export const deleteHabitFromGroupAPI = (habitId, groupId) => {
       body: JSON.stringify(deletedHabitAndGroup)
     })
       .then(response => response.json())
-      .then(groupIdDelete => {
-        console.log(
-          "successfully deleted habit is: ",
-          habitId,
-          " from group ",
-          groupIdDelete
-        );
-        dispatch(deleteHabitFromGroup(habitId, groupIdDelete));
+      .then(groupDelete => {
+        dispatch(deleteHabitFromGroup(habitId, groupDelete._id));
       });
   };
 };
@@ -116,7 +116,6 @@ export const deleteGroupAPI = groupId => {
     })
       .then(response => response.json())
       .then(groupIdDelete => {
-        console.log("successfully deleted group is: ", groupIdDelete);
         dispatch(deleteGroup(groupIdDelete));
       });
   };
@@ -131,7 +130,6 @@ export const getAllHabitsInGroupAPI = (habitIdList, groupId) => {
     })
       .then(response => response.json())
       .then(habits => {
-        console.log(habits);
         dispatch(addHabitsToGroup(habits, groupId));
       });
   };

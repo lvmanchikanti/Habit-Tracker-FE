@@ -1,34 +1,37 @@
 import React, { useState } from "react";
-import { Button, Modal} from "reactstrap";
+import { Button, Modal } from "reactstrap";
 import TextField from "@material-ui/core/TextField";
 import ButtonUI from "@material-ui/core/Button";
 
-const CreateUser = ({
-    createNewUserAPI
-}) => {
-    const [modalOpen, setModalOpen] = useState(false);
-    const [newUser, setNewUser] = useState({
-        name: "",
-        username: "",
-        email: "",
-        password: ""
-      });
+const CreateUser = ({ createNewUserAPI }) => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [newUser, setNewUser] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: ""
+  });
 
-      const handleUserChange = (event, name) => {
-        //name change
-        if (event.target) {
-          setNewUser({ ...newUser, [event.target.name]: event.target.value });
-        }
-      };
-  return(
+  const handleUserChange = (event, name) => {
+    //name change
+    if (event.target) {
+      setNewUser({ ...newUser, [event.target.name]: event.target.value });
+    }
+  };
+  return (
     <>
-      <Button style={{backgroundColor: "#A27DB1", 
-              border: "#A27DB1",
-              width: 186,
-              height: 51,
-              fontSize: "24px", 
-              borderRadius: "8px"}} 
-              type="button" onClick={() => setModalOpen(true)}>
+      <Button
+        style={{
+          backgroundColor: "#A27DB1",
+          border: "#A27DB1",
+          width: 186,
+          height: 51,
+          fontSize: "24px",
+          borderRadius: "8px"
+        }}
+        type="button"
+        onClick={() => setModalOpen(true)}
+      >
         REGISTER
       </Button>
       <Modal
@@ -52,43 +55,43 @@ const CreateUser = ({
         </div>
         <div className="modal-body">
           <form className="create-habit-modal-form">
-          <TextField
-            id="name"
-            label="Full Name"
-            name="name"
-            value={newUser.name}
-            onChange={event => handleUserChange(event)}
-            margin="normal"
-            variant="outlined"
+            <TextField
+              id="name"
+              label="Full Name"
+              name="name"
+              value={newUser.name}
+              onChange={event => handleUserChange(event)}
+              margin="normal"
+              variant="outlined"
             />
-          <TextField
-            id="username"
-            label="Username"
-            name="username"
-            value={newUser.username}
-            onChange={event => handleUserChange(event)}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            id="email"
-            label="Email"
-            name="email"
-            value={newUser.email}
-            onChange={event => handleUserChange(event)}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            id="password"
-            label="Password"
-            name="password"
-            type="password"
-            value={newUser.password}
-            onChange={event => handleUserChange(event)}
-            margin="normal"
-            variant="outlined"
-          />
+            <TextField
+              id="username"
+              label="Username"
+              name="username"
+              value={newUser.username}
+              onChange={event => handleUserChange(event)}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              id="email"
+              label="Email"
+              name="email"
+              value={newUser.email}
+              onChange={event => handleUserChange(event)}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              id="password"
+              label="Password"
+              name="password"
+              type="password"
+              value={newUser.password}
+              onChange={event => handleUserChange(event)}
+              margin="normal"
+              variant="outlined"
+            />
           </form>
         </div>
         <div className="modal-footer">
@@ -97,7 +100,6 @@ const CreateUser = ({
             type="button"
             variant="outlined"
             onClick={() => {
-              console.log(newUser);
               createNewUserAPI(newUser);
               //reset values in newUser
               setNewUser({
@@ -114,8 +116,7 @@ const CreateUser = ({
         </div>
       </Modal>
     </>
-  )
-
+  );
 };
 
 export default CreateUser;
