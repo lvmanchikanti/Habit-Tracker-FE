@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
 }));
 const UserSideProfile = ({ habitCount }) => {
   const classes = useStyles();
-  console.log(habitCount);
 
   return (
     <Card className="user-side-profile-container">

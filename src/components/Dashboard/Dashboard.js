@@ -70,7 +70,6 @@ const Dashboard = props => {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     groups: state.groups,
     habits: state.habits,
