@@ -21,7 +21,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const Dashboard = props => {
   const [groups, setGroups] = useState(props.groups);
   const [habits, setHabits] = useState(props.habits);
-  const [groupsWithHabits, setGroupsWithHabits] = useState();
 
   // Fetch Habits and Groups from endpoint
   const collectionsURL = "http://localhost:8000/collections/";
@@ -39,21 +38,11 @@ const Dashboard = props => {
     setHabits(data);
   };
 
-  const populateGroupWithHabitObjects = () => {
-    console.log("hey");
-    console.log(groups);
-    groups.forEach(group => {
-      console.log("current group: ", group.name);
-      //props.groupActions.getAllHabitsInGroupAPI(group.habitIds, group._id);
-    });
-  };
-
   useEffect(() => {
     // fetchGroups();
     // fetchHabits();
     props.groupActions.getExistingGroupsAPI(setGroups);
     props.habitActions.getExistingHabitsAPI(setHabits);
-    // populateGroupWithHabitObjects(groups);
   }, []);
 
   // setGroups(props.existingGroups);
@@ -65,9 +54,6 @@ const Dashboard = props => {
   console.log("state groups: ", groups);
   console.log("state habits: ", habits);
 
-  // if (groups.length > 0) {
-  //   populateGroupWithHabitObjects();
-  // }
   const { groupActions, habitActions } = props;
 
   return (

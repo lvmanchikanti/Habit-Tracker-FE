@@ -62,12 +62,6 @@ export const getExistingGroupsAPI = setGroups => {
     setGroups(data);
 
     dispatch(getExistingGroups(data));
-
-    // fetch(collectionsURL)
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     dispatch(getExistingGroups(data));
-    //   });
   };
 };
 
@@ -88,8 +82,6 @@ export const createNewGroupAPI = newGroup => {
 };
 
 export const deleteHabitFromGroupAPI = (habitId, groupId) => {
-  console.log("check: ", habitId, " ", groupId);
-
   //ES6 object initializer using variable names
   //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer
   let deletedHabitAndGroup = { habitId, groupId };
@@ -114,8 +106,6 @@ export const deleteHabitFromGroupAPI = (habitId, groupId) => {
 };
 
 export const deleteGroupAPI = groupId => {
-  console.log("checking group: ", groupId);
-
   let deletedGroup = { groupId };
 
   return dispatch => {
@@ -133,7 +123,6 @@ export const deleteGroupAPI = groupId => {
 };
 
 export const getAllHabitsInGroupAPI = (habitIdList, groupId) => {
-  console.log("check here");
   return dispatch => {
     fetch(habitsURL + "getMany", {
       headers: { "Content-Type": "application/json" },

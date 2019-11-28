@@ -66,7 +66,6 @@ export const createNewHabitAPI = newHabit => {
 };
 
 export const deleteHabitAPI = habitId => {
-  console.log("check: ", habitId);
   return dispatch => {
     fetch(habitsURL + "delete/" + habitId, {
       headers: { "Content-Type": "application/json" },
