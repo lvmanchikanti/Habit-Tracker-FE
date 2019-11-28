@@ -28,7 +28,6 @@ const CreateHabit = ({
     }
     //dropdown group change
     else {
-      console.log(event);
       setNewHabit({ ...newHabit, [name]: event.value });
     }
   };
@@ -118,7 +117,6 @@ const CreateHabit = ({
             type="button"
             variant="outlined"
             onClick={() => {
-              console.log(newHabit);
               createNewHabitAPI(newHabit);
               //reset values in newHabit
               setNewHabit({

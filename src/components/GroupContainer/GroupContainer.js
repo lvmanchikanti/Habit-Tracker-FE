@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function TabPanel(props) {
+const TabPanel = props => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -45,14 +45,15 @@ function TabPanel(props) {
       <Box p={3}>{children}</Box>
     </Typography>
   );
-}
+};
 
 const GroupContainer = ({
   existingGroups,
   deleteHabitAPI,
   deleteHabitFromGroup,
   deleteGroup,
-  getAllHabitsInGroup
+  getAllHabitsInGroup,
+  deleteAllHabitsFromGroup
 }) => {
   const classes = useStyles();
 
@@ -73,12 +74,7 @@ const GroupContainer = ({
         className={classes.tabs}
       >
         {existingGroups.map(group => {
-          return (
-            <Tab
-              label={group.name}
-              //onClick={() => getAllHabitsInGroup(group.habitIds, group._id)}
-            />
-          );
+          return <Tab label={group.name} />;
         })}
       </Tabs>
       {existingGroups.map((group, index) => {
@@ -124,6 +120,8 @@ const GroupContainer = ({
               color="secondary"
               onClick={() => {
                 deleteGroup(group._id);
+                deleteAllHabitsFromGroup(group.habitIds);
+                setValue(0);
               }}
               className={classes.deleteButton}
             >
