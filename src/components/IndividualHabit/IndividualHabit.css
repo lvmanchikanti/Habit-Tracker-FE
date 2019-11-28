@@ -1,0 +1,13 @@
+.progress-bar {
+  margin-top: 15px;
+  flex-grow: 3;
+  margin-right: 5px;
+}
+.progress-icons {
+  display: flex;
+  flex-direction: row;
+}
+.progress-habit-name {
+  padding: 0;
+  margin: 0;
+}
