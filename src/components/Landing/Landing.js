@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from 'react-router'
+import "./Landing.css";
 
 //This page handles fetching users from DB, button for sign up w/ modal, button for login w/ modal
 
@@ -38,24 +39,26 @@ const Landing = props => {
     const { userActions } = props;
 
     return (
-        <div>
-            <h1>Landing Page</h1>
-            <CreateUser
-                createNewUserAPI={userActions.createNewUserAPI}
-            />
-            <LoginUser
-                loginUserAPI={userActions.loginUserAPI}
-                history={props.history}
-            />
-            <h2>Users</h2>
-            {users && users.map(user => {
-                return (
-                  <div key={user._id}>
-                    <h3>{user.name}</h3>
-                  </div>
-                );
-            })}
-        </div>
+    <div className="landing-page">
+            <div className="header">
+                <h2 className="logo">habit tracker</h2>
+            </div>
+            <div className="title-container">
+                <h1 className="title">Motivate yourself to <br></br>achieve your goals today</h1>
+                    <h3 className="subtitle">Create, track, and organize your habits alongside your friends!</h3>
+                    <div className="button1">
+                        <LoginUser
+                            loginUserAPI={userActions.loginUserAPI}
+                            history={props.history}
+                        />
+                    </div>
+                    <div className="button2">
+                        <CreateUser
+                            createNewUserAPI={userActions.createNewUserAPI}
+                        />
+                    </div>
+            </div>
+    </div>
     )
 };
 

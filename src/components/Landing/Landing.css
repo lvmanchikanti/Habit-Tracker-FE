@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i&display=swap');
+
+.landing-page {
+    background-image: linear-gradient(#AF98E5, #E9E4F0);
+    height: 50rem;
+    font-family: 'Rubik', sans-serif;
+    color: white;
+    text-align: center
+}
+
+.header {
+    text-align: left;
+    padding: 50px 0px 0px 50px;
+}
+
+.title-container {
+    padding-top: 7em;
+}
+
+.title {
+    font-size: 60px;
+    font-weight: medium;
+    white-space: pre-wrap;
+    padding-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 24px;
+    font-style: italic;
+    font-weight: lighter;
+    padding-bottom: 60px;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.button1, .button2 {
+    display: inline;
+}
+
+.button1 {
+    padding-right: 10em;
+}
+
+.button2 {
+    padding-left: 10em;
+}

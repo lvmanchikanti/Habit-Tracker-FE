@@ -4,7 +4,6 @@ import TextField from "@material-ui/core/TextField";
 import ButtonUI from "@material-ui/core/Button";
 
 const LoginUser = ({
-    loginUserAPI,
     history
 }) => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -21,8 +20,13 @@ const LoginUser = ({
       };
   return(
     <>
-      <Button color="primary" type="button" onClick={() => setModalOpen(true)}>
-        Login
+      <Button style={{backgroundColor: "#A27DB1", 
+              border: "#A27DB1",
+              width: 186,
+              height: 51,
+              fontSize: "24px", 
+              borderRadius: "8px"}} type="button" onClick={() => setModalOpen(true)}>
+        LOGIN
       </Button>
       <Modal
         className="modal-dialog-centered"
@@ -68,21 +72,11 @@ const LoginUser = ({
         </div>
         <div className="modal-footer">
           <ButtonUI
-            color="secondary"
-            variant="outlined"
-            data-dismiss="modal"
-            type="button"
-            onClick={() => setModalOpen(false)}
-          >
-            Close
-          </ButtonUI>
-          <ButtonUI
             color="primary"
             type="button"
             variant="outlined"
             onClick={() => {
-              loginUserAPI(loginUser)
-              history.push(`/profile`)
+              history.push(`/dashboard`)
               setModalOpen(false);
               //TODO: login user and redirect to dashboard
             }}

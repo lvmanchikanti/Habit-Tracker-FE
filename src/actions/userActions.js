@@ -63,15 +63,4 @@ import {
         });
     };
   };
-
-  export const loginUserAPI = loginUser => {
-    return dispatch => {
-      fetch(usersURL + "login", {
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-        body: JSON.stringify(loginUser)
-      })
-        .then(response => localStorage.setItem('usertoken', response.data));
-    };
-  };
   
