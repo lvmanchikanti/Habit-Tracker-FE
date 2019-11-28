@@ -1,0 +1,28 @@
+{
+  "lahariHabits": [
+    {
+      "habitName": "Sketch",
+      "metric": {
+        "currentTotal": 13,
+        "goalTotal": 21
+      },
+      "progress": 34
+    },
+    {
+      "habitName": "Jumprope",
+      "metric": {
+        "currentTotal": 3,
+        "goalTotal": 30
+      },
+      "progress": 78
+    },
+    {
+      "habitName": "Meal Prep",
+      "metric": {
+        "currentTotal": 9,
+        "goalTotal": 13
+      },
+      "progress": 54
+    }
+  ]
+}

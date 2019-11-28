@@ -1,0 +1,28 @@
+{
+  "simoneHabits": [
+    {
+      "habitName": "Gym",
+      "metric": {
+        "currentTotal": 43,
+        "goalTotal": 60
+      },
+      "progress": 67
+    },
+    {
+      "habitName": "Journal",
+      "metric": {
+        "currentTotal": 32,
+        "goalTotal": 40
+      },
+      "progress": 32
+    },
+    {
+      "habitName": "Skincare Routine",
+      "metric": {
+        "currentTotal": 9,
+        "goalTotal": 13
+      },
+      "progress": 21
+    }
+  ]
+}
