@@ -12,7 +12,7 @@ const IndividualHabit = ({ habitName, progress, deleteHabit }) => {
       <p className="progress-habit-name">{habitName}</p>
 
       <div className="progress-icons">
-        <Progress className="progress-bar" value={progressCounter} />
+        <Progress className="progress-bar-container" value={progressCounter} />
 
         <IconButton onClick={() => setProgressCounter(progressCounter + 10)}>
           <CheckIcon />
