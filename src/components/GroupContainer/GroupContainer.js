@@ -73,13 +73,13 @@ const GroupContainer = ({
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        {existingGroups.map(group => {
-          return <Tab label={group.name} />;
+        {existingGroups.map((group, index) => {
+          return <Tab key={index} label={group.name} />;
         })}
       </Tabs>
       {existingGroups.map((group, index) => {
         return (
-          <TabPanel value={value} index={index}>
+          <TabPanel value={value} index={index} key={index}>
             <div className={classes.expansion}>
               <ExpansionPanel>
                 <ExpansionPanelSummary
@@ -94,10 +94,11 @@ const GroupContainer = ({
                 <div className="friend-dropdown-habits">
                   <div>
                     {group.habitObjects &&
-                      group.habitObjects.map(habit => {
+                      group.habitObjects.map((habit, index) => {
                         if (habit.habitName != null) {
                           return (
                             <IndividualHabit
+                              key={index}
                               habitName={habit.habitName}
                               progress={25}
                               deleteHabit={() => {

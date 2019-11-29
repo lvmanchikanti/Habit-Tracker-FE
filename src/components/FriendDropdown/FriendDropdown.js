@@ -31,9 +31,10 @@ const FriendDropDown = () => {
           <h6>Lahari's Habits</h6>
         </ExpansionPanelSummary>
         <div className="friend-dropdown-habits">
-          {LahariHabits.lahariHabits.map(habit => {
+          {LahariHabits.lahariHabits.map((habit, index) => {
             return (
               <IndividualHabit
+                key={index}
                 habitName={habit.habitName}
                 progress={habit.progress}
               />
@@ -51,9 +52,10 @@ const FriendDropDown = () => {
           <h6>Simone's Habits</h6>
         </ExpansionPanelSummary>
         <div className="friend-dropdown-habits">
-          {SimoneHabits.simoneHabits.map(habit => {
+          {SimoneHabits.simoneHabits.map((habit, index) => {
             return (
               <IndividualHabit
+                key={index}
                 habitName={habit.habitName}
                 progress={habit.progress}
               />
