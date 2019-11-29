@@ -17,6 +17,7 @@ import UserSideProfile from "../../components/UserSideProfile";
 
 // Import Material UI Components
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Button } from "reactstrap";
 
 const Dashboard = props => {
   const { groupActions, habitActions, groups, habits } = props;
@@ -31,7 +32,7 @@ const Dashboard = props => {
   console.log("props habit count: ", habits.habitCount);
 
   return (
-    <div>
+    <div className="dashboard">
       {groups.length === 0 && habits.length === 0 && (
         <div>
           <CircularProgress />
@@ -40,19 +41,33 @@ const Dashboard = props => {
 
       {(groups.length !== 0 || habits.length !== 0) && (
         <div>
-          <Header />
+          <div className="header">
+            <h2 className="logo">habit tracker</h2>
+            <Button className="logout-btn" 
+             onClick={() => {
+              props.history.push(`/`)
+            }}
+            style={{
+              background: "none",
+              border: "none",
+              fontWeight: "medium"
+            }}>
+              Logout</Button>
+          </div>
           <div className="dashboard-container">
             <div className="dashboard-profile">
               <UserSideProfile habitCount={props.habits.habitCount} />
             </div>
 
             <div className="dashboard-content">
+              <div className="create-habit-btn">
               <CreateHabit
                 existingGroups={groups.currentGroups}
                 createNewHabitAPI={habitActions.createNewHabitAPI}
                 createNewGroupAPI={groupActions.createNewGroupAPI}
                 incrementHabit={habitActions.incrementHabits}
               />
+              </div>
               <GroupContainer
                 existingGroups={groups.currentGroups}
                 deleteHabitAPI={habitActions.deleteHabitAPI}
