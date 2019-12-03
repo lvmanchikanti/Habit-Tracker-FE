@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 const Header = () => {
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar  style={{backgroundColor: "#A27DB1"}}>
         <Typography variant="h6">Habit Tracker</Typography>
         <div className="header-button-container">
           <Button color="inherit">Dashboard</Button>

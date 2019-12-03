@@ -29,9 +29,9 @@ const UserSideProfile = ({ habitCount }) => {
         <Avatar className={classes.bigAvatar}>CM</Avatar>
         <h3>Cynthia Mo</h3>
         <h6>Number of Habits</h6>
-        <h6>{habitCount}</h6>
+        <p>{habitCount}</p>
         <h6>Longest Streak</h6>
-        <h6>43</h6>
+        <p>43</p>
         <h6>Friends</h6>
         <div className="user-side-profile-friends">
           <Avatar className={classes.smallAvatar}>LM</Avatar>

@@ -34,7 +34,15 @@ const CreateHabit = ({
   return (
     <>
       <Button
-        color="primary"
+        style={{
+          backgroundColor: "#A27DB1",
+          border: "#A27DB1",
+          width: 160,
+          height: 41,
+          fontSize: "14px",
+          borderRadius: "8px",
+          color: "#FFFFFF"
+        }}
         variant="contained"
         onClick={() => setModalOpen(true)}
       >

@@ -1,33 +1,51 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
-body {
-  text-align: center;
-  /* font-family: "Open Sans", sans-serif; */
-  font-family: "Roboto";
-  background-color: white;
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i&display=swap');
+
+.dashboard {
+  background-image: linear-gradient(#AF98E5, #E9E4F0);
+  height: 50rem;
+  font-family: 'Rubik', sans-serif;
 }
 
-.main-heading {
-  font-size: 40px;
+.logo {
+  display: inline;
+  font-weight: bold;
+  font-size: 36px;
+  color: white;
 }
-.secondary-heading {
-  font-size: 20px;
+
+.logout-btn {
+  display: inline;
+  margin-left: 60em;
+  margin-bottom: 10px;
 }
+
 .photo {
   widows: 300px;
   height: 300px;
 }
+
 .paragraph {
   font-size: 14px;
   color: black;
 }
+
 .dashboard-container {
-  margin: 20px;
   display: flex;
+  margin-top: 20px;
+  box-shadow: black;
 }
+
 .dashboard-profile {
+  margin: 2em 5em 0 5em;
   flex-grow: 1;
 }
 
 .dashboard-content {
-  flex-grow: 2;
+  margin-right: 6em;
+  flex-grow: 1;
+  margin-left: -10em;
+}
+
+.create-habit-btn {
+  margin-bottom: 15px;
 }

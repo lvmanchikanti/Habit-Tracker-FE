@@ -1,0 +1,28 @@
+{
+  "simoneHabitsEducation": [
+    {
+      "habitName": "Study Business flashcards",
+      "metric": {
+        "currentTotal": 43,
+        "goalTotal": 60
+      },
+      "progress": 84
+    },
+    {
+      "habitName": "Review one chapter of Finance",
+      "metric": {
+        "currentTotal": 32,
+        "goalTotal": 40
+      },
+      "progress": 35
+    },
+    {
+      "habitName": "Take notes on Finance",
+      "metric": {
+        "currentTotal": 9,
+        "goalTotal": 13
+      },
+      "progress": 68
+    }
+  ]
+}
