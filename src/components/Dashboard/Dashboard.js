@@ -68,6 +68,7 @@ const Dashboard = props => {
                 incrementHabit={habitActions.incrementHabits}
               />
               </div>
+              <div className="group-container">
               <GroupContainer
                 existingGroups={groups.currentGroups}
                 deleteHabitAPI={habitActions.deleteHabitAPI}
@@ -76,6 +77,7 @@ const Dashboard = props => {
                 getAllHabitsInGroup={groupActions.getAllHabitsInGroupAPI}
                 deleteAllHabitsFromGroup={habitActions.deleteAllHabitsFromGroup}
               />
+              </div>
             </div>
           </div>
         </div>

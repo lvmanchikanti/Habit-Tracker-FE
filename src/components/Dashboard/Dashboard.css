@@ -49,3 +49,7 @@
 .create-habit-btn {
   margin-bottom: 15px;
 }
+
+.group-container {
+  overflow-y: scroll;
+}
