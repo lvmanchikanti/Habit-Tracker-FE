@@ -100,6 +100,7 @@ const GroupContainer = ({
                             <IndividualHabit
                               key={index}
                               habitName={habit.habitName}
+                              progress={0}
                               deleteHabit={() => {
                                 deleteHabitAPI(habit._id);
                                 deleteHabitFromGroup(
@@ -115,7 +116,9 @@ const GroupContainer = ({
                 </div>
               </ExpansionPanel>
             </div>
-            <FriendDropdown />
+            <FriendDropdown 
+              groupName={group.name}
+            />
             <Button
               color="secondary"
               onClick={() => {

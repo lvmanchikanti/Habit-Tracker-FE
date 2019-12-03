@@ -6,6 +6,10 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import LahariHabits from "../../constants/LahariHabits.json";
 import SimoneHabits from "../../constants/SimoneHabits.json";
+import ArtLahari from "../../constants/ArtLahari.json";
+import ArtSimone from "../../constants/ArtSimone.json";
+import EducationLahari from "../../constants/EducationLahari.json";
+import EducationSimone from "../../constants/EducationSimone.json";
 
 import IndividualHabit from "../IndividualHabit";
 
@@ -16,7 +20,7 @@ const useStyles = makeStyles({
   }
 });
 
-const FriendDropDown = () => {
+const FriendDropDown = ({groupName}) => {
   const classes = useStyles();
 
   return (
@@ -28,19 +32,37 @@ const FriendDropDown = () => {
           aria-controls="additional-actions1-content"
           id="additional-actions1-header"
         >
-          <h6>Lahari's Habits</h6>
+        <h6>Lahari's Habits</h6>
         </ExpansionPanelSummary>
-        <div className="friend-dropdown-habits">
-          {LahariHabits.lahariHabits.map((habit, index) => {
-            return (
-              <IndividualHabit
-                key={index}
-                habitName={habit.habitName}
-                progress={habit.progress}
-              />
-            );
-          })}
-        </div>
+
+        {groupName === "Education" && (
+          <div className="friend-dropdown-habits">
+            {EducationLahari.lahariHabitsEducation.map((habit, index) => {
+              return (
+                <IndividualHabit
+                  key={index}
+                  habitName={habit.habitName}
+                  progress={habit.progress}
+                />
+              );
+            })}
+          </div>
+        )}
+
+        {groupName === "Art" && (
+          <div className="friend-dropdown-habits">
+            {ArtLahari.lahariHabitsArt.map((habit, index) => {
+              return (
+                <IndividualHabit
+                  key={index}
+                  habitName={habit.habitName}
+                  progress={habit.progress}
+                />
+              );
+            })}
+          </div>
+        )}
+
       </ExpansionPanel>
       <ExpansionPanel>
         <ExpansionPanelSummary
@@ -49,19 +71,35 @@ const FriendDropDown = () => {
           aria-controls="additional-actions3-content"
           id="additional-actions3-header"
         >
-          <h6>Simone's Habits</h6>
+        <h6>Simone's Habits</h6>
         </ExpansionPanelSummary>
-        <div className="friend-dropdown-habits">
-          {SimoneHabits.simoneHabits.map((habit, index) => {
-            return (
-              <IndividualHabit
-                key={index}
-                habitName={habit.habitName}
-                progress={habit.progress}
-              />
-            );
-          })}
-        </div>
+        {groupName === "Education" && (
+          <div className="friend-dropdown-habits">
+            {EducationSimone.simoneHabitsEducation.map((habit, index) => {
+              return (
+                <IndividualHabit
+                  key={index}
+                  habitName={habit.habitName}
+                  progress={habit.progress}
+                />
+              );
+            })}
+          </div>
+        )}
+
+        {groupName === "Art" && (
+          <div className="friend-dropdown-habits">
+            {ArtSimone.simoneHabitsArt.map((habit, index) => {
+              return (
+                <IndividualHabit
+                  key={index}
+                  habitName={habit.habitName}
+                  progress={habit.progress}
+                />
+              );
+            })}
+          </div>
+        )}
       </ExpansionPanel>
     </div>
   );
