@@ -100,7 +100,6 @@ const GroupContainer = ({
                             <IndividualHabit
                               key={index}
                               habitName={habit.habitName}
-                              progress={25}
                               deleteHabit={() => {
                                 deleteHabitAPI(habit._id);
                                 deleteHabitFromGroup(
