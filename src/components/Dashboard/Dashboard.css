@@ -41,11 +41,16 @@
 }
 
 .dashboard-content {
-  margin-right: 6em;
   flex-grow: 1;
-  margin-left: -10em;
+  background: white;
+  overflow-y: scroll;
+  margin-top: 4em;
+  margin-left: -30em;
+  margin-right: 8em;
+  border-radius: 0.7%;
 }
 
 .create-habit-btn {
   margin-bottom: 15px;
+  margin-right: 20em;
 }
