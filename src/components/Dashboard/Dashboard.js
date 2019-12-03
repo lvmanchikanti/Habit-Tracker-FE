@@ -59,15 +59,15 @@ const Dashboard = props => {
               <UserSideProfile habitCount={props.habits.currentHabits.length} />
             </div>
 
-            <div className="dashboard-content">
-              <div className="create-habit-btn">
+            <div className="create-habit-btn">
               <CreateHabit
                 existingGroups={groups.currentGroups}
                 createNewHabitAPI={habitActions.createNewHabitAPI}
                 createNewGroupAPI={groupActions.createNewGroupAPI}
                 incrementHabit={habitActions.incrementHabits}
               />
-              </div>
+            </div>
+            <div className="dashboard-content">
               <GroupContainer
                 existingGroups={groups.currentGroups}
                 deleteHabitAPI={habitActions.deleteHabitAPI}
