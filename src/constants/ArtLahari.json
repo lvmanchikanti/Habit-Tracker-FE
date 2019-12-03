@@ -1,0 +1,20 @@
+{
+  "lahariHabitsArt": [
+    {
+      "habitName": "Sketch once a day",
+      "metric": {
+        "currentTotal": 15,
+        "goalTotal": 21
+      },
+      "progress": 36
+    },
+    {
+      "habitName": "Wash paint brushes after every use",
+      "metric": {
+        "currentTotal": 3,
+        "goalTotal": 30
+      },
+      "progress": 78
+    }
+  ]
+}

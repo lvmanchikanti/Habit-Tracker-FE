@@ -56,7 +56,7 @@ const Dashboard = props => {
           </div>
           <div className="dashboard-container">
             <div className="dashboard-profile">
-              <UserSideProfile habitCount={props.habits.habitCount} />
+              <UserSideProfile habitCount={props.habits.currentHabits.length} />
             </div>
 
             <div className="dashboard-content">
