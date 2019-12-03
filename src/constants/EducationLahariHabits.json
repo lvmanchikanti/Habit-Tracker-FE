@@ -1,0 +1,20 @@
+{
+  "lahariHabitsEducation": [
+    {
+      "habitName": "Watch Chemistry lecture",
+      "metric": {
+        "currentTotal": 13,
+        "goalTotal": 21
+      },
+      "progress": 34
+    },
+    {
+      "habitName": "Organic compound flashcards",
+      "metric": {
+        "currentTotal": 3,
+        "goalTotal": 30
+      },
+      "progress": 78
+    }
+  ]
+}
