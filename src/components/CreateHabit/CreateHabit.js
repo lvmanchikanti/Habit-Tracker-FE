@@ -104,7 +104,7 @@ const CreateHabit = ({
             )}
             {showCreateGroup && (
               <CreateGroup
-                onClick={() => setShowCreateGroup(!showCreateGroup)}
+                toggleCreateCreate={() => setShowCreateGroup(!showCreateGroup)}
                 createNewGroupAPI={createNewGroupAPI}
               />
             )}
