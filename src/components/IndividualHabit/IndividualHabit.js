@@ -4,8 +4,8 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckIcon from "@material-ui/icons/Check";
 
-const IndividualHabit = ({ habitName, deleteHabit }) => {
-  const [progressCounter, setProgressCounter] = useState(0);
+const IndividualHabit = ({ progress, habitName, deleteHabit }) => {
+  const [progressCounter, setProgressCounter] = useState(progress);
 
   return (
     <div>
